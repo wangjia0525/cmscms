@@ -1,0 +1,51 @@
+/*rest css*/
+h1, h2, h3, ul, p, dl, dd, input, textarea {
+    margin: 0;
+    padding: 0;
+}
+
+ul, dl {
+    list-style: none;
+}
+
+i, em {
+    font-style: normal;
+}
+
+img {
+    vertical-align: top;
+}
+
+input, textarea {
+    border: none;
+    outline: none;
+}
+
+textarea {
+    resize: none;
+}
+
+a {
+    text-decoration: none;
+}
+input, dd, span, label, a, li {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+body {
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    font-family: Arial;
+    -webkit-text-size-adjust:none
+}
+
+
+
+
+
+
+
+
+
+
+

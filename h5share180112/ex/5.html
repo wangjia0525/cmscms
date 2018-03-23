@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--插入播放按钮得文字图标格式（具体使用方法可以百度http://fontawesome.dashgame.com/）-->
+    <link rel="stylesheet" href="../css/font-awesome.css">
+    <!--页面结构设置得样式-->
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            font-family: 'microsoft yahei', 'Helvetica', simhei, simsun, sans-serif;
+            background-color: #F7F7F7;
+        }
+
+        a {
+            text-decoration: none;
+        }
+        .playerTitle{
+            width:100%;
+            margin: 0 auto;
+            line-height:100px;
+            font-size: 40px;
+            text-align: center;
+        }
+        .player{
+            width: 720px;
+            height: 360px;
+            margin: 0 auto;
+            background: url("../images/loading.gif") center no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+        video{
+            height:100%;
+            margin: 0 auto;
+            display: none;
+        }
+        .controls {
+            width: 720px;
+            height: 40px;
+            position: absolute;
+            left: 0px;
+            bottom: -40px;
+            background-color: #000;
+        }
+        .controls > .switch{
+            width: 20px;
+            height: 20px;
+            display: block;
+            font-size: 20px;
+            color: #fff;
+            position: absolute;
+            left: 10px;
+            top: 10px;
+        }
+        .controls > .expand{
+            width: 20px;
+            height: 20px;
+            display: block;
+            font-size: 20px;
+            color: #fff;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+        .controls > .progress{
+            width: 430px;
+            height: 10px;
+            position: absolute;
+            left:40px;
+            bottom:15px;
+            background-color: #555;
+        }
+        .controls > .progress > .bar{
+            width:100%;
+            height:100%;
+            border-radius: 3px;
+            cursor: pointer;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            z-index: 999;
+        }
+        .controls > .progress > .loaded{
+            width:60%;
+            height:100%;
+            background-color: #999;
+            border-radius: 3px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 2;
+        }
+        .controls > .progress > .elapse{
+            width:0%;
+            height:100%;
+            background-color: #fff;
+            border-radius: 3px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 3;
+        }
+        .controls > .time{
+            height: 20px;
+            position: absolute;
+            left:490px;
+            top: 10px;
+            color: #fff;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<h3 class="playerTitle">视频播放器</h3>
+<div class="player">
+    <video src="../mp4/chrome.mp4"></video>
+    <div class="controls">
+        <!--javascript:; a链接点击不让跳转       fa 库名fa-play 文字名      文字库使用方法-->
+        <a href="javascript:;" class="switch fa fa-play"></a>
+        <a href="javascript:;" class="expand fa fa-expand"></a>
+        <div class="progress">
+            <!--点击的透明层，效果是点击改变进度条和播放得当前时间-->
+            <div class="bar"></div>
+            <!--缓冲进度条（由于是本地视频加载比较快所以就没法感受到没写0.0）-->
+            <div class="loaded"></div>
+            <!--播放进度条-->
+            <div class="elapse"></div>
+        </div>
+        <div class="time">
+            <!--播放当前时间-->
+            <span class="currentTime">00:00:00</span>
+            \
+            <!--视频时间总长度-->
+            <span class="totalTime">00:00:00</span>
+        </div>
+    </div>
+</div>
+<!--基于jquery的文件引入-->
+<script src="./jquery.min.js"></script>
+<script>
+    /*通过jq来实现功能*/
+    $(function(){
+        /*1.获取播放器 对象的转换,把jquery转换为dom对象*/
+        var video=$("video")[0];
+
+        /*2.实现播放与暂停*/
+        $(".switch").click(function(){
+            /*实现播放与暂停的切换：如果是暂停>>播放  ，如果是播放 >> 暂停*/
+            if(video.paused){
+                video.play();
+                /*移除暂停样式，添加播放样式*/
+            }
+            else{
+                video.pause();
+                /*移除播放样式，添加暂停样式*/
+            }
+            /*设置标签的样式  fa-pause:暂停   fa-play：播放*/
+            $(this).toggleClass("fa-play fa-pause");
+        });
+
+        /*3.实现全屏操作*/
+        $(".expand").click(function(){
+            /*全屏>>不同浏览器需要添加不同的前缀>>能力测试*/
+            if(video.requestFullScreen){
+                video.requestFullScreen();
+            }
+            else if(video.webkitRequestFullScreen){
+                video.webkitRequestFullScreen();
+            }
+            else if(video.mozRequestFullScreen){
+                video.mozRequestFullScreen();
+            }
+            else if(video.msRequestFullScreen){
+                video.msRequestFullScreen();
+            }
+        });
+
+        /*4.实现播放业务逻辑：当视频文件可以播放时触发下面的事件*/
+        video.oncanplay=function(){
+            setTimeout(function(){
+                /*1.将视频文件设置为显示*/
+                video.style.display="block";
+                /*2.获取当前视频文件的总时长(以秒做为单位，同时获取了小数值)，计算出时分秒*/
+                var total=video.duration; //01:01:40   00:00:36
+                /*3.计算时分少  60*60=3600
+                 * 3700:3700/3600
+                 * 3700:3700%3600 >> 100 /60*/
+                /*var hour=Math.floor(total/3600);
+                 /!*补0操作*!/
+                 hour=hour<10?"0"+hour:hour;
+                 var minute=Math.floor(total%3600/60);
+                 minute=minute<10?"0"+minute:minute;
+                 var second=Math.floor(total%60);
+                 second=second<10?"0"+second:second;*/
+                var result=getResult(total)
+                /*4.将计算结果展示在指定的dom元素中*/
+                $(".totalTime").html(result);
+            },2000);
+        }
+
+        /*通过总时长计算出时分秒*/
+        function getResult(time){
+            var hour=Math.floor(time/3600);
+            /*补0操作*/
+            hour=hour<10?"0"+hour:hour;
+            var minute=Math.floor(time%3600/60);
+            minute=minute<10?"0"+minute:minute;
+            var second=Math.floor(time%60);
+            second=second<10?"0"+second:second;
+            /*返回结果*/
+            return hour+":"+minute+":"+second;
+        }
+
+        /*5.实现播放过程中的业务逻辑，当视频播放时会触发ontimeupdate事件
+         * 如果修改currentTime值也会触发这个事件，说白了，只要currenTime值变化，就会触发这个事件*/
+        video.ontimeupdate=function(){
+            /*1.获取当前的播放时间*/
+            var current=video.currentTime;
+            /*2.计算出时分秒*/
+            var result=getResult(current);
+            /*3.将结果展示在指定的dom元素中*/
+            $(".currentTime").html(result);
+            /*4.设置当前播放进度条样式  0.12>>0.12*100=12+%>12%*/
+            var percent=current/video.duration*100+"%";
+            $(".elapse").css("width",percent);
+        }
+
+        /*6.实现视频的跳播*/
+        $(".bar").click(function(e){
+            /*1.获取当前鼠标相对于父元素的left值--偏移值*/
+            var offset= e.offsetX;
+            /*2.计算偏移值相对总父元素总宽度的比例*/
+            var percent=offset/$(this).width();
+            /*3.计算这个位置对应的视频进度值*/
+            var current=percent*video.duration;
+            /*4.设置当前视频的currentTime*/
+            video.currentTime=current;
+        });
+
+        /*7.播放完毕之后，重置播放器的状态*/
+        video.onended=function(){
+//            当前播放时间清零
+            video.currentTime=0;
+//            播放按钮的事件由暂停替换位播放
+            $(".switch").removeClass("fa-pause").addClass("fa-play");
+        }
+    });
+</script>
+</body>
+</html>

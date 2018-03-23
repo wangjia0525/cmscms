@@ -1,0 +1,92 @@
+<!Doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,user-scalable=no,maximum-scale=1,initial-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="keywords" content="" />
+    <meta id="description" name="description"  content="" />
+    <link rel="icon" href="../img/da.ico">
+    <link href="../css/member.css" rel="stylesheet" type="text/css" />
+    <title>支付成功</title>
+</head>
+<body>
+<div class="pay_success">
+    <img src="../img/h5/paysuccess.png" alt=""/>
+    <p>下载APP</p>
+</div>
+<script type="text/javascript" src="../js/jquery-1.12.2.min.js"></script>
+<script type="text/javascript" src="../js/session.js"></script>
+<script type="text/javascript" src="../js/cookie.js"></script>
+<script type="text/javascript" src="../js/plugin.js"></script>
+<script type="text/javascript" src="../js/index.js"></script>
+<script>
+    var browser = {
+        versions: function () {
+            var u = navigator.userAgent, app = navigator.appVersion;
+            return {         //移动终端浏览器版本信息
+                trident: u.indexOf('Trident') > -1, //IE内核
+                presto: u.indexOf('Presto') > -1, //opera内核
+                webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或uc浏览器
+                iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+                iPad: u.indexOf('iPad') > -1, //是否iPad
+                webApp: u.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
+                MQQBrowser: u.indexOf('MQQBrowser') !== -1
+            };
+        }(),
+        language: (navigator.browserLanguage || navigator.language).toLowerCase()
+    }
+    $('.pay_success>p').click(function(){
+        if (browser.versions.mobile) {//判断是否是移动设备打开。browser代码在下面
+            var ua = navigator.userAgent.toLowerCase();//获取判断用的对象
+            var localUrl="";
+            if (browser.versions.ios) {
+                //打开中间页
+                window.location.href="../static.html";
+            }
+            if(browser.versions.android){
+                if (ua.match(/MicroMessenger/i) == "micromessenger") {
+                    //在微信中打开
+                    //打开中间页
+                    window.location.href="../static.html";
+                    window.open(static.html);
+                }
+                if (ua.match(/WeiBo/i) == "weibo") {
+                    localUrl="ixinghui://ixinghui.share.com";
+                    window.location.href = localUrl;
+                }
+                if (browser.versions.MQQBrowser) {
+                    //在QQ打开
+                    localUrl="ixinghui://ixinghui.share.com";
+                    window.location.href = localUrl;
+                }
+            }
+        }else {
+            //否则就是PC浏览器打开
+            window.open("http://android.myapp.com/myapp/detail.htm?apkName=com.yunxuan.ixinghui")
+        }
+        //创建iframe
+        var  createIframe=(function(){
+            var iframe;
+            return function(){
+                if(iframe){
+                    return iframe;
+                }else{
+                    iframe = document.createElement('iframe');
+                    iframe.style.display = 'none';
+                    document.body.appendChild(iframe);
+                    return iframe;
+                }
+            }
+        })();
+    })
+</script>
+</body>
+</html>

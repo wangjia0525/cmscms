@@ -1,0 +1,362 @@
+<!Doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <!--<meta name="viewport" content="width=375, user-scalable=no">-->
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="keywords" content="" />
+    <meta id="m1" itemprop="name" content=""/>
+    <meta id="m2"  itemprop="image" content="" />
+    <meta id="m3"  name="description" itemprop="description" content="" />
+    <link rel="icon" href="../img/da.ico">
+    <title>文章</title>
+    <script src="js/ueditor.parse.js" ></script>
+    <script src="js/jquery-1.12.2.min.js"></script>
+    <script src="js/article.js"></script>
+    <link href="css/article.css" rel="stylesheet" type="text/css" />
+<body>
+<div class="article">
+    <div class="title"></div>
+    <div class="nameTime clear">
+        <!--<span>陈奕迅</span>-->
+        <!--<span>2015.10.14 10:00</span>-->
+        <!--<span>20000 阅读</span>-->
+    </div>
+    <div class="abstracts"></div>
+    <div class="content" id="content"></div>
+    <div class="fromSource clear"></div>
+    <div class="articleEvaluate"><span></span></div>
+    <ul class="evaluate">
+        <!--<li>-->
+        <!--<div>-->
+        <!--<img src="img/Icon-60@3x.png" alt=""/>-->
+        <!--<span>罗文杲</span>-->
+        <!--<span> 5 &nbsp;<img src="img/like.png" alt=""/></span>-->
+        <!--</div>-->
+        <!--<p  class="clear">-->
+        <!--杂志是国内外公开发行的国家级专业性综合学术期刊，创刊于1993年，卫生部原部长陈敏章、副部长顾英奇为创刊题词，在有关领导、各位编委、专家、作者、读者及广大医务工作者大力支持和帮助下，刊物质量不断提高，国内外影响逐步扩大。现已被《中国知网》、《中国万方数据》、《中国学术期刊综合评价数据库》、《中国期刊全文数据库》、《中国核心期刊（遴选）数据库》等多家数据库收录。本刊由中华人民共和国卫生部主管，由中国康复医学会和黑龙江省截瘫研究所主办，为医务人员评职、考核、晋级提供重要依据。-->
+        <!--</p>-->
+        <!--<p>3分钟前</p>-->
+        <!--</li>-->
+    </ul>
+</div>
+<script>
+    var articleId= href.split("&")[0].split("=")[1].match(re)[0];
+    var userId= href.split("&")[1].split("=")[1].match(re)[0];
+    var ver= href.split("&")[2].split("=")[1].match(re)[0];
+    //    console.log(articleId,userId);
+    function getArticle(prams,callBack){
+        $.ajax({
+            async: true,
+            type: "get",
+            data: prams,
+            cache: false,
+            url: endpoint + "getArticle" + jsonpoint,
+            success:function(data){
+                return callBack(data);
+            }
+        })
+    }
+    getArticle(
+            {
+                articleId:articleId,
+                userId:userId
+            },
+            function(data){
+                var articleEvaluates=data.articleEvaluate;
+                var userId=data.article.userId;
+                $('.content').html(data.article.content);
+//                $('.content img').css({width:100% !important,height:20 !important})
+                $('.title').html(data.article.title);
+                if(data.article.isShowAbstracts==1){
+                    $('.abstracts').html(data.article.abstracts).css({ backgroundColor: '#F6F6F6'});
+                }else{
+                    $('.abstracts').css('padding',0).hide();
+                }
+                if(data.article.fromSource==''||data.article.fromSource==undefined){
+                    $('.fromSource').hide();
+                }else{
+                    $('.fromSource').html('文章来源:'+data.article.fromSource);
+                }
+
+                $('.articleEvaluate>span').html('评论 ('+ data.articleEvaluate.length+')').css({borderLeft:'2px solid #000'});
+                var nameTimeHtml;
+                if(data.article.isPlatform==1){
+                    nameTimeHtml=`
+                    <span class="isPlatform" style="color:#0ac2c7">${data.article.authorName}</span>`;
+                    var time=data.article.postedTime.slice(0,data.article.postedTime.length-3);
+                    nameTimeHtml+=`
+                   <span>${time}</span>
+                    <span>${data.article.readNumber} 阅读</span>
+                `;
+                }else{
+                    nameTimeHtml=`
+                    <span>${data.article.authorName}</span>`;
+                    var time=data.article.postedTime.slice(0,data.article.postedTime.length-3);
+                    nameTimeHtml+=`
+                   <span>${time}</span>
+                    <span>${data.article.readNumber} 阅读</span>
+                `;
+                }
+
+                $('.nameTime').html(nameTimeHtml);
+                $('.isPlatform').click(function(e){
+                    e.stopPropagation();
+                    window.location.href="ixinghui://ixinghui.share.com?userId="+userId;
+                })
+//                评论
+
+                for(var i= 0,evaluateHtml='',time,count=articleEvaluates.length;i<count;i++){
+                    evaluateHtml+=`<li>
+                    <div>
+                        <img onclick="toUsers(${articleEvaluates[i].user.user.userId})" src="${articleEvaluates[i].user.user.headURL}" alt=""/>
+                        <span onclick="toUsers(${articleEvaluates[i].user.user.userId})">${articleEvaluates[i].user.realName}</span>`;
+                    if(articleEvaluates[i].isThumbup==0){
+                        evaluateHtml+= `<span> <img id="zan${articleEvaluates[i].articleEvaluateId}" onclick="zan(${articleEvaluates[i].articleEvaluateId})" src="img/nolike.png" alt=""/></span><span style="color:#000">${articleEvaluates[i].articleThumbupNum}</span>`
+                    }else{
+                        evaluateHtml+= `<span> <img id="zan${articleEvaluates[i].articleEvaluateId}" onclick="zan(${articleEvaluates[i].articleEvaluateId})" src="img/like.png" alt=""/></span><span style="color:#0AC2C7">${articleEvaluates[i].articleThumbupNum}</span>`
+                    };
+                    evaluateHtml+=`
+                        </div>
+                    <p>
+                        <span class="p1">${articleEvaluates[i].content}</span>
+                        <span class="p2">`;
+                    evaluateHtml+=`${articleEvaluates[i].createTime}</span>` ;
+                    if(articleEvaluates[i].isDelete==1){
+                        evaluateHtml+=`<span id="deleteEvaluates${articleEvaluates[i].articleEvaluateId}" class="delete" onclick="deleteEvaluates(${articleEvaluates[i].articleEvaluateId})">删除</span>`;
+                    }
+                    evaluateHtml+=`</p>
+                </li>`;
+                }
+                if(articleEvaluates.length==0){
+                    $('.evaluate').html(`<li><img style="margin-left: 36.8%;width:26.4%;" src="img/sofa.png" alt=""/></li>`);
+                }else{
+                    $('.evaluate').html(evaluateHtml);
+                }
+				//                设置样式
+                uParseT('#content',{
+                    rootPath: 'js/'
+                })
+                if(ver == "1"){
+                    loading();
+                }
+            }
+    )
+    function insArticleThumbupForH5(prams, callBack) {
+        $.ajax({
+            async: true,
+            type : "POST",
+            data: prams,
+            cache: false,
+            url : endpoint + "insArticleThumbupForH5" + jsonpoint,
+            success: function (data) {
+                return callBack(data);
+            },
+            error: function (data) {
+
+            }
+        })
+    }
+    //    点赞
+    var articleEvaluateId;
+    function zan(data1){
+        articleEvaluateId=data1;
+//        console.log(articleEvaluateId,userId)
+        insArticleThumbupForH5(
+            {
+                userId:userId,
+                articleEvaluateId:articleEvaluateId
+            },function(data){
+                if($('#zan'+articleEvaluateId).attr('src')=='img/nolike.png'){
+                    $('#zan'+articleEvaluateId).attr('src','img/like.png');
+                    $('#zan'+articleEvaluateId).parent().next().html(parseInt($('#zan'+articleEvaluateId).parent().next().html())+1);
+                    $('#zan'+articleEvaluateId).parent().next().css('color','#0AC2C7');
+                    $.extend({
+                        tipsBox: function (options) {
+                            options = $.extend({
+                                obj: null, //jq对象，要在那个html标签上显示
+                                str: "+1", //字符串，要显示的内容;也可以传一段html，如: "<b style='font-family:Microsoft YaHei;'>+1</b>"
+                                startSize: "12px", //动画开始的文字大小
+                                endSize: "30px",  //动画结束的文字大小
+                                interval: 1000, //动画时间间隔
+                                color: "red",  //文字颜色
+                                callback: function () { }  //回调函数
+                            }, options);
+                            $("body").append("<span class='num'>" + options.str + "</span>");
+                            var box = $(".num");
+                            var left = options.obj.offset().left - options.obj.width();
+                            var top = options.obj.offset().top - options.obj.height();
+                            box.css({
+                                "position": "absolute",
+                                "left": left + "px",
+                                "top": top + "px",
+                                "z-index": 9999,
+                                "font-size": options.startSize,
+                                "line-height": options.endSize,
+                                "color": options.color
+                            });
+                            box.animate({
+                                "font-size": options.endSize,
+                                "opacity": "0",
+                                "left":left-10+'px',
+                                "top": top - 40 + "px"
+                            }, options.interval, function () {
+                                box.remove();
+                                options.callback();
+                            });
+                        }
+                    });
+                    $.tipsBox({
+                        obj: $('#zan'+articleEvaluateId),
+                        str: "+1",
+                        callback: function () {
+                        }
+                    });
+                }else{
+                    $('#zan'+articleEvaluateId).attr('src','img/nolike.png');
+                    $('#zan'+articleEvaluateId).parent().next().html(parseInt($('#zan'+articleEvaluateId).parent().next().html())-1);
+                    $('#zan'+articleEvaluateId).parent().next().css('color','#000');
+                }
+
+            }
+        )
+    }
+    //    删除
+    function deleteArticleEvaluateForH5(prams, callBack) {
+        $.ajax({
+            async: true,
+            type : "POST",
+            data: prams,
+            cache: false,
+            url : endpoint + "deleteArticleEvaluateForH5" + jsonpoint,
+            success: function (data) {
+                return callBack(data);
+            },
+            error: function (data) {
+
+            }
+        })
+    }
+    var cvaluateCount;
+    var flag=0;
+    function deleteEvaluates(data){
+        articleEvaluateId=data;
+        flag=1;
+        document.addEventListener('touchmove', function (event) {　 //监听滚动事件
+            if(flag==1){　　　　　　　　　　　　　　　　　　　　　　　　　　//判断是遮罩显示时执行，禁止滚屏
+                event.preventDefault();　　　　　　　　　　　　　　　　　　　//最关键的一句，禁止浏览器默认行为
+            }
+        })
+//        console.log(articleEvaluateId);
+        $("body").prepend(`<div class="parsetcroBox" >
+            <div class="deleteConfirm">
+            <div class="cropperBox">确定删除吗?</div>
+            <ul class="bottomBox">
+                <li class="imgBoxBtn queding">确定</li>
+                <li class="quxiao">取消</li>
+            </ul>
+            </div>
+            </div>`);
+
+        $(".parsetcroBox").show();
+        $(".deleteConfirm").css({
+            width:$(".parsetcroBox").width()*.72,
+            height:$(".parsetcroBox").width()*.36,
+            top:$(window).height() / 2-$(".parsetcroBox").width()*.28/2,
+            left:$(window).width() / 2-$(".parsetcroBox").width()*.7/2
+        });
+
+        $(".quxiao").on("click",function(){
+            $(".parsetcroBox").remove();
+            flag=0;
+        })
+        $(".queding").on("click",function(){
+            $(".parsetcroBox").remove();
+            flag=0;
+            deleteArticleEvaluateForH5(
+                    {
+                        articleEvaluateId:articleEvaluateId
+                    },function(data){
+                        if(data.err.code==0){
+                            $('#deleteEvaluates'+articleEvaluateId).parent().parent().remove();
+                            $('.articleEvaluate>span').html('评论 ('+ (parseInt($('.articleEvaluate>span').html().replace(/^[^\d]*(\d+)[^\d]*$/, "$1"))-1)+')');
+                        }
+                    }
+
+            )
+        })
+
+    }
+    //评论成功之后执行
+    function updateArticle(){
+        updateArticles(
+                {
+                    articleId:articleId,
+                    userId:userId
+                },
+                function(data){
+
+                    var articleEvaluates=data.articleEvaluate;
+//                评论
+                    $('.articleEvaluate>span').html('评论 ('+articleEvaluates.length+')');
+                    for(var i= 0,evaluateHtml='',time,count=articleEvaluates.length;i<count;i++){
+                        evaluateHtml+=`<li>
+                    <div>
+                        <img onclick="toUsers(${articleEvaluates[i].user.user.userId})" src="${articleEvaluates[i].user.user.headURL}" alt=""/>
+                        <span onclick="toUsers(${articleEvaluates[i].user.user.userId})">${articleEvaluates[i].user.realName}</span>`;
+                        if(articleEvaluates[i].isThumbup==0){
+                            evaluateHtml+= `<span> <img id="zan${articleEvaluates[i].articleEvaluateId}" onclick="zan(${articleEvaluates[i].articleEvaluateId})" src="img/nolike.png" alt=""/></span><span style="color:#000">${articleEvaluates[i].articleThumbupNum}</span>`
+                        }else{
+                            evaluateHtml+= `<span> <img id="zan${articleEvaluates[i].articleEvaluateId}" onclick="zan(${articleEvaluates[i].articleEvaluateId})" src="img/like.png" alt=""/></span><span style="color:#0AC2C7">${articleEvaluates[i].articleThumbupNum}</span>`
+                        };
+                        evaluateHtml+=`
+                        </div>
+                    <p>
+                        <span class="p1">${articleEvaluates[i].content}</span>
+                        <span class="p2">`;
+                        evaluateHtml+=`${articleEvaluates[i].createTime}</span>` ;
+                        if(articleEvaluates[i].isDelete==1){
+                            evaluateHtml+=`<span id="deleteEvaluates${articleEvaluates[i].articleEvaluateId}" class="delete" onclick="deleteEvaluates(${articleEvaluates[i].articleEvaluateId})">删除</span>`;
+                        }
+                        evaluateHtml+=`</p>
+                </li>`;
+                    }
+                    $('.evaluate').html(evaluateHtml);
+                    if(articleEvaluates.length==0){
+                        $('.evaluate').html(`<li><img style="margin-left: 36.8%;width:26.4%;" src="img/sofa.png" alt=""/></li>`);
+                    }else{
+                        $('.evaluate').html(evaluateHtml);
+                    }
+                }
+        )
+    }
+    function updateArticles(prams,callBack){
+        $.ajax({
+            async: true,
+            type: "get",
+            data: prams,
+            cache: false,
+            url: endpoint + "updateArticle" + jsonpoint,
+            success:function(data){
+                return callBack(data);
+            }
+        })
+    }
+    function toUsers(userId){
+        window.location.href="ixinghui://ixinghui.share.com?userId="+userId;
+    }
+    function loading(){
+        window.location.href="ixinghui://ixinghui.share.com?loading=1";
+    }
+</script>
+
+<script type="text/javascript" defer>
+
+</script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!Doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,user-scalable=no,maximum-scale=1,initial-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="keywords" content="" />
+    <meta id="m1" itemprop="name" content="i幸会2017-2018超级课表，重新定义营销"/>
+    <meta id="m2"  itemprop="image" content="http://api.ixinghui.com:81/ixinghui-share/img/sher.png" />
+    <meta id="m3"  name="description" itemprop="description" content="这是一个全民营销的时代，不断学习才能先人一步" />
+    <link rel="icon" href="../img/da.ico">
+    <link href="../css/member.css" rel="stylesheet" type="text/css" />
+    <title>课程表</title>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+</head>
+<body>
+<img src="../img/h5/course1.png" alt=""/>
+<div class="courseImg">
+    <img src="" alt=""/>
+    <ul>
+        <li>您好！</li>
+        <li class="userName"></li>
+    </ul>
+</div>
+<img class="hide" src="../img/h5/course6.png" alt=""/>
+<img src="../img/h5/course2.png" alt=""/>
+<img src="../img/h5/course3.png" alt=""/>
+<img src="../img/h5/course4.png" alt=""/>
+<img src="../img/h5/course10.png" alt=""/>
+<img style="margin-bottom: 2rem" src="../img/h5/course5.png" alt=""/>
+
+<div class="parbot">
+    <input type="button" class="joinMember" value="加入会员"/>
+</div>
+<script type="text/javascript" src="../js/jquery-1.12.2.min.js"></script>
+<script type="text/javascript" src="../js/session.js"></script>
+<script>
+    var href = window.location.hash.replace(/$#/, '');
+    var re = /^\d*/;
+    //    var userId = href.split("&")[0].split("=")[1].match(re)[0];
+    var  userId;
+    function GetQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  unescape(r[2]); return null;
+    }
+    if(GetQueryString('state')!=null){
+        userId=GetQueryString('state');
+    }else{
+       userId = href.split("&")[0].split("=")[1].match(re)[0];
+    }
+//    console.log(userId);
+    $.session.set("shareId",userId);
+    if(href.split("&").length>1){
+        var isInApp = href.split("&")[1].split("=")[1].match(re)[0];
+        console.log(isInApp);
+        if(!isInApp){
+            $('.parbot').show();
+            $('.hide').show() ;
+            $('.courseImg').show() ;
+        }
+    }else{
+        $('.parbot').show();
+        $('.hide').show() ;
+        $('.courseImg').show() ;
+    }
+    if(href.split("&").length=3){
+        var isFromPouView = GetQueryString('isFromPouView');
+        if(isFromPouView==1){
+            $('.hide').hide() ;
+            $('.courseImg').hide() ;
+        }
+    }
+
+</script>
+<script type="text/javascript" src="../js/index.js"></script>
+<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/qzact/common/share/share.js"></script>
+
+<script>
+    $.ajax({
+        async: true,
+        type: "get",
+        data: {
+            userId:userId
+        },
+        cache: false,
+        url: endpoint + "getUserForH5" + jsonpoint,
+        success:function(data){
+//            console.log(data.user);
+            $('.courseImg>img').attr('src',data.user.user.headURL);
+            $('.userName').html(data.user.user.name+'邀您进入新营销时代');
+        }
+    })
+
+
+    $('.parbot').click(function(){
+        location.href='register.html';
+    })
+</script>
+<!--<script type="text/javascript" src="../js/twoShare.js"></script>-->
+</body>
+</html>
