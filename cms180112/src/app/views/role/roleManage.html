@@ -1,0 +1,49 @@
+<!--
+	role list !
+-->
+<h3>{{rootColumnName}}
+   <small>{{rootColumnPrompt}}</small>
+</h3>
+<div ng-controller="roleManageCtrl" class="panel panel-default">
+	<div class="panel-heading">
+		<form class="form-inline">
+			<p style="display: inline-block; height: 30px;line-height: 30px;"> 共有 <strong ng-bind="dataLength"></strong> 条</p>
+			<button type="button" ng-click="addRoleModal()" class="btn btn-labeled btn-success pull-right">
+               	<span class="btn-label">
+               		<i class="fa fa-plus"></i>
+               	</span>添加
+			</button>
+		</form>
+	</div>
+	<div class="panel-body" ng-class="loading?'whirl standard':'' " style="border-top: 1px solid #CFDBE2;">
+		<table class="table table-striped table-condensed">
+			<thead>
+				<tr>
+              		<th><i class="icon-flag"></i> 角色ID</th>
+              		<th ><i class="icon-user"></i> 角色名</th>
+              		<th><i class="icon-grid"></i> 角色类型</th>
+              		<th><i class="icon-grid"></i> 角色属性</th>
+              		<th class="hidden-phone"><i class="icon-doc"></i> 介绍</th>
+              		<th><i class="icon-wrench"></i> 操作</th>
+          		</tr>
+			</thead>
+			<tbody>
+             	 <!-- repeat begin -->
+              	<tr ng-repeat="roleItem in roleList ">
+                  	<td>{{roleItem.roleId}}</td>
+                  	<td>{{roleItem.name}}</td>
+                  	<td>{{roleItem.type | role_type_filter}}</td>
+                  	<td>{{roleItem.property | role_property_filter}}</td>
+                  	<td title="{{roleItem.introduce}}">{{roleItem.introduce | limitTo:"20"}}</td>
+                  	<td>
+                      	<a tooltip="修改" tooltip-trigger="mouseenter" class="btn btn-xs btn-warning" ng-click="updateRoleModal(roleItem.roleId,roleItem.name,roleItem.introduce,roleItem.property)"><i class="icon-pencil"></i></a>
+                      	<a tooltip="删除" tooltip-trigger="mouseenter" class="btn btn-xs btn-danger"  ng-click="delRole(roleItem.roleId)"><i class="icon-trash"></i></a>
+                      	<a tooltip="给角色配置栏目" tooltip-trigger="mouseenter" class="btn btn-xs btn-primary"  ng-click="configColumnToRoleModal(roleItem.roleId)"><i class="icon-settings" ></i></a>
+                  	</td>
+             	 </tr>
+             	 <!-- repeat end -->
+			</tbody>
+		</table>
+		
+	</div>
+</div>

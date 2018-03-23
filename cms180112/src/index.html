@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="microdream">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta name="description" content="{{app.description}}">
+		<meta name="keywords" content="cms,microdreams,microdream,云宣众行,app">
+		<title>i幸会 - 后台管理平台</title>
+		<link rel="icon" href="app/img/da.ico">
+		<!-- Bootstrap styles-->
+		<link rel="stylesheet" href="app/css/bootstrap.css" data-ng-if="!app.layout.isRTL">
+		<link rel="stylesheet" href="app/css/bootstrap-rtl.css" data-ng-if="app.layout.isRTL">
+		<!-- Application styles-->
+		<link rel="stylesheet" href="app/css/app.css" data-ng-if="!app.layout.isRTL">
+		<link rel="stylesheet" href="app/css/app-rtl.css" data-ng-if="app.layout.isRTL">
+		<!-- Themes-->
+		<link rel="stylesheet" ng-href="{{app.layout.theme}}" data-ng-if="app.layout.theme">
+		<!-- custom -->
+		<link rel="stylesheet" type="text/css" href="app/css/custom.css" />
+		<link rel="stylesheet" type="text/css" href="vendor/angular-tree-control/tree-control.css"/>
+		<link rel="stylesheet" type="text/css" href="vendor/angular-tree-control/tree-control-attribute.css"/>
+	</head>
+
+	<body data-ng-class="{ 'layout-fixed' : app.layout.isFixed, 'aside-collapsed' : app.layout.isCollapsed, 'layout-boxed' : app.layout.isBoxed, 'layout-fs': app.useFullLayout, 'hidden-footer': app.hiddenFooter, 'layout-h': app.layout.horizontal, 'aside-float': app.layout.isFloat}">
+		<div data-ui-view="" data-autoscroll="false" class="wrapper"></div>
+		<script src="app/js/base.js"></script>
+		<script src="vendor/angular-tree-control/angular-tree-control.js" type="text/javascript" charset="utf-8"></script>
+		<script src="vendor/angular-locale_zh-cn.js" type="text/javascript" charset="utf-8"></script>
+
+		<!-- 图片放大旋转 -->
+		<!-- Add mousewheel plugin (this is optional) -->
+		<script type="text/javascript" src="vendor/fancybox/lib/jquery.mousewheel-3.0.6.pack.js"></script>
+	
+		<!-- Add fancyBox main JS and CSS files -->
+		<script type="text/javascript" src="vendor/fancybox/source/jquery.fancybox.js?v=2.1.3"></script>
+		<link rel="stylesheet" type="text/css" href="vendor/fancybox/source/jquery.fancybox.css?v=2.1.2" media="screen" />
+	
+		<!-- Add Button helper (this is optional) -->
+		<link rel="stylesheet" type="text/css" href="vendor/fancybox/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
+		<script type="text/javascript" src="vendor/fancybox/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+	
+		<!-- Add Thumbnail helper (this is optional) -->
+		<link rel="stylesheet" type="text/css" href="vendor/fancybox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
+		<script type="text/javascript" src="vendor/fancybox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+		<!-- 复制0-->
+		<script type="text/javascript" src="app/js/ueditor/clipboard.min.js"></script>
+		<!-- 扫码预览-->
+		<script src="app/js/ueditor/qrcode.js"></script>
+		<!-- Add Media helper (this is optional) -->
+		<script type="text/javascript" src="vendor/fancybox/source/helpers/jquery.fancybox-media.js?v=1.0.5"></script>
+		<!-- 七牛 -->
+		<script type="text/javascript"  src="app/js/qiniu/plupload.full.min.js"></script>
+		<script type="text/javascript"  src="app/js/qiniu/qiniu.js"></script>
+		<!-- 富文本-->
+		<script type="text/javascript" charset="utf-8" src="app/js/ueditor/ueditor.config.js"></script>
+		<script type="text/javascript" charset="utf-8" src="app/js/ueditor/ueditor.all.min.js"> </script>
+		<!--<script type="text/javascript" charset="utf-8" src="app/js/ueditor/ueditor.parse.js"> </script>-->
+		<!--<script type="text/javascript" src="js/plupload.full.min.js"></script>-->
+		<!--<script type="text/javascript" src="ckeditor/ckeditor.js"></script>-->
+		<!-- 文件上传 -->
+		<script src="app/js/lib/ng-file-upload-shim.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/lib/ng-file-upload.min.js" type="text/javascript" charset="utf-8"></script>
+		<!--  -->
+		<script>
+		    //optional need to be loaded before angular-file-upload-shim(.min).js
+		    FileAPI = {
+		        //only one of jsPath or jsUrl.
+		        jsPath: 'app/js/FileAPI.min.js/folder/',
+		        jsUrl: 'app/js/lib/FileAPI.min.js',
+		
+		        //only one of staticPath or flashUrl.
+		        staticPath: 'app/js/lib/FileAPI.flash.swf/folder/',
+		        flashUrl: 'app/js/lib/FileAPI.flash.swf'
+		
+		        //forceLoad: true, html5: false //to debug flash in HTML5 browsers
+		        //noContentTimeout: 10000 (see #528)
+		    }
+		</script>
+		<script src="app/js/app.js"></script>
+		<!-- service -->
+		<script src="app/js/service/browser.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/Utils.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/toggleStateService.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/RouteHelpers.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/Notify.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/navSearch.js" type="text/javascript" charset="utf-8"></script>
+		<!-- network -->
+		<script src="app/js/service/sessionService.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/dataservice.js" type="text/javascript" charset="utf-8"></script>
+		<!-- common -->
+		<script src="app/js/service/factory/CommonFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/modalService.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/yulanService.js" type="text/javascript" charset="utf-8"></script>
+		<!-- power factory -->
+		<script src="app/js/service/factory/CmsSectionFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/GetSectionFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/ColumnFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/RoleFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/CmsUserFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/InterfaceFactory.js" type="text/javascript" charset="utf-8"></script>
+		<!-- service -->
+		<script src="app/js/service/factory/LoginFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/AdviceFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/ParamsFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/MobileUserFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/StatisticsFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/TopicFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/ContestFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/FieldFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/ReportFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/OtherFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/FoldFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/versionUpdateFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/SystemMessageFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/SensitiveFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/BannerFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/CoursesFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/CodeFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/RechargeFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/MoneyFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/yxlFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/productBuyFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/alreadySentFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/userMessageFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/homePageFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/classTeacherFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/studySituationFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/memberManageFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/accountFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/articleFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script src="app/js/service/factory/shareFactory.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			var winWidth = window.Width || document.documentElement.clientWidth || document.body.clientWidth;
+			var winHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+			//禁用滚轮
+			function disabledMouseWheel() {
+				if (document.addEventListener) {
+
+					document.addEventListener('DOMMouseScroll', scrollFunc, false);
+				}//W3C
+				window.onmousewheel = document.onmousewheel = scrollFunc;//IE/Opera/Chrome
+			}
+
+			//开启滚轮
+			function scrollFunc(evt) {
+				evt = evt || window.event;
+				if(evt.preventDefault) {
+					// Firefox
+					evt.preventDefault();
+					evt.stopPropagation();
+				} else {
+					// IE
+					evt.cancelBubble=true;
+					evt.returnValue = false;
+				}
+				return false;
+
+			}
+		</script>
+	</body>
+</html>

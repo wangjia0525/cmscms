@@ -1,0 +1,34 @@
+<div class="panel">
+	<div class="panel-heading">
+		<h4 class="modal-title" ng-bind-html="addUserTitle"></h4>
+	</div>
+	<div class="panel-body">
+		<form class="form-horizontal">
+			<div class="form-group has-feedback" ng-class="userName?'':'has-error' ">
+				<label for="inputUserName" class="col-sm-3 control-label">用户名</label>
+				<div class="col-sm-9">
+					<input type="text" ng-model="userName" class="form-control" id="inputUserName" placeholder="用户名">
+					<span class="form-control-feedback" ng-show="!userName"><i class="fa fa-times"></i></span>
+				</div>
+			</div>
+			<div class="form-group has-feedback" ng-class="userPwd?'':'has-error' ">
+				<label for="inputUserPwd" class="col-sm-3 control-label">密&nbsp;&nbsp;&nbsp;&nbsp;码</label>
+				<div class="col-sm-9">
+					<input type="password" ng-model="userPwd" class="form-control" id="inputUserPwd" placeholder="输入新密码">
+					<span class="form-control-feedback" ng-show="!userPwd"><i class="fa fa-times"></i></span>
+				</div>
+			</div>
+			<div ng-hide="rootSectionId != 0" class="form-group has-feedback">
+				<label for="" class="col-sm-3 control-label">部&nbsp;&nbsp;&nbsp;&nbsp;门</label>
+				<div class="col-sm-9">
+					<select class="custom-css form-control"  ng-model="sectionItem" ng-options="sectionItem.name for sectionItem in sections" >
+					</select>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="panel-footer text-right bg-white">
+		<button type="button" class="btn btn-default" ng-click="closeThisDialog()">取消</button>
+		<button type="button" class="btn btn-primary" ng-click="addCmsUser(userName,userPwd,sectionItem)">确认</button>
+	</div>
+</div>

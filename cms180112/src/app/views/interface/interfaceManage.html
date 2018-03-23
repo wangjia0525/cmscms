@@ -1,0 +1,57 @@
+<!--
+	interface list !
+-->
+<h3>{{rootColumnName}}
+   <small>{{rootColumnPrompt}}</small>
+</h3>
+<div ng-controller="interfaceManageCtrl" class="panel panel-default">
+	<div class="panel-heading">
+		<form class="form-inline">
+			<div class="form-group">
+				<label for="searchInput"></label>
+				<input type="text"  ng-keyup="dataEvent($event)" ng-model="searchKey" class="form-control" id="searchInput" placeholder="接口地址">
+			</div>
+			<button type="button" ng-click="addInterfaceModal()" class="btn btn-labeled btn-success pull-right">
+               	<span class="btn-label">
+               		<i class="fa fa-plus"></i>
+               	</span>添加
+			</button>
+			<span style="float: right;">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			<button type="button" ng-click="checkUser()" class="btn btn-labeled btn-success pull-right">
+				<span class="btn-label">
+				<i class="fa fa-plus"></i>
+				</span>注册失败处理
+			</button>
+		</form>
+	</div>
+	<div class="panel-body" ng-class="loading?'whirl standard':'' " style="border-top: 1px solid #CFDBE2;">
+		<table class="table table-striped table-condensed">
+			<thead>
+				<tr>
+              		<th><i class="icon-flag"></i> 接口ID</th>
+              		<th ><i class="icon-doc"></i> 介绍</th>
+              		<th ><i class="icon-link"></i> 接口地址</th>
+              		<th ><i class="icon-grid"></i> 接口类型</th>
+              		<th ><i class="icon-"></i> 部门权限</th>
+              		<th><i class="icon-wrench"></i> 操作</th>
+          		</tr>
+			</thead>
+			<tbody>
+				<!-- repeat begin -->
+              	<tr ng-repeat="interfaceItem in interfaceList | orderBy:['type','-interfaceId']:true ">
+                  	<td>{{interfaceItem.interfaceId}}</td>
+                  	<td>{{interfaceItem.introduce}}</td>
+                  	<td>{{interfaceItem.url}}</td>
+                  	<td>{{interfaceItem.type | interface_type_filter }}</td>
+                  	<td>{{interfaceItem.sectionType | interface_sectionType_filter}}</td>
+                  	<td>
+                      	<a tooltip="修改" tooltip-trigger="mouseenter" class="btn btn-xs btn-warning" ng-click="updateInterfaceModal(interfaceItem.interfaceId,interfaceItem.introduce,interfaceItem.url,interfaceItem.type,interfaceItem.sectionType)"><i class="icon-pencil"></i></a>
+                      	<a tooltip="删除" tooltip-trigger="mouseenter" class="btn btn-xs btn-danger" 	 ng-click="delInterface(interfaceItem.interfaceId)"><i class="icon-trash"></i></a>
+                  	</td>
+             	 </tr>
+             	 <!-- repeat end -->
+			</tbody>
+		</table>
+		<p style="display: inline-block; margin:21px 0;height: 30px;line-height: 30px;"> 显示 <strong ng-bind="dataLength"></strong> 条</p>
+	</div>
+</div>

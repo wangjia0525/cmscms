@@ -1,0 +1,71 @@
+{
+  "err":{
+    "code":0,
+    "msg":"正常",
+    "eventId":"xxxx-xxxx-xxxx"
+  },
+  "result":[
+    {
+      "id":111111111,
+      "productId":222222222,
+      "productName":"妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈",
+      "money":222,
+      "type":1,
+      "cmsuser":{
+        "name":"田闯是"
+      },
+      "createTime":"2016-09-09 23:00:00",
+      "status":1,
+      "expirationTime":"2016-09-09 23:40:00",
+      "number":80,
+      "dhNumber":40,
+      "remark":"我是备注"
+    },{
+      "id":111111111,
+      "productId":222222222,
+      "productName":"妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈",
+      "money":222,
+      "type":2,
+      "cmsuser":{
+        "name":"田闯是"
+      },
+      "createTime":"2016-09-09 23:00:00",
+      "status":2,
+      "expirationTime":"2016-09-09 23:00:00",
+      "number":80,
+      "dhNumber":40,
+      "remark":"我是备注"
+    },{
+      "id":111111111,
+      "productId":222222222,
+      "productName":"妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈",
+      "money":222,
+      "type":1,
+      "cmsuser":{
+        "name":"田闯是"
+      },
+      "createTime":"2016-09-09 23:00:00",
+      "status":2,
+      "expirationTime":"2016-09-09 23:40:00",
+      "number":80,
+      "dhNumber":40,
+      "remark":"我是备注"
+    },{
+      "id":111111111,
+      "productId":222222222,
+      "productName":"妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈妈",
+      "money":222,
+      "type":1,
+      "cmsuser":{
+        "name":"田闯是"
+      },
+      "createTime":"2016-09-09 23:40:00",
+      "status":2,
+      "expirationTime":"2016-09-09 23:00:00",
+      "number":80,
+      "dhNumber":40,
+      "remark":"我是备注"
+    }
+  ],
+  "totalCount":100
+}

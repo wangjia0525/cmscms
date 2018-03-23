@@ -1,0 +1,39 @@
+{
+  "err":{
+    "code":0,
+    "msg":"正常",
+    "eventId":"xxxx-xxxx-xxxx"
+  },
+  "result":[
+    {
+      "cdkey":222222,
+      "cdkeyInfoId":333333,
+      "productId":22,
+      "userPhone":18191918291,
+      "conversionTime":"2015-09-09 23:00:00",
+      "status":1
+    },{
+      "cdkey":222222,
+      "cdkeyInfoId":333333,
+      "productId":22,
+      "userPhone":18191918291,
+      "conversionTime":"2015-09-09 23:00:00",
+      "status":1
+    },{
+      "cdkey":222222,
+      "cdkeyInfoId":333333,
+      "productId":22,
+      "userPhone":18191918291,
+      "conversionTime":"2015-09-09 23:00:00",
+      "status":1
+    },{
+      "cdkey":222222,
+      "cdkeyInfoId":333333,
+      "productId":22,
+      "userPhone":18191918291,
+      "conversionTime":"2015-09-09 23:00:00",
+      "status":1
+    }
+  ],
+  "totalCount":100
+}

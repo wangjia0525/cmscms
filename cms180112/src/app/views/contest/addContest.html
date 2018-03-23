@@ -1,0 +1,75 @@
+<!--
+	a mobileUser detail !
+-->
+<div ng-controller="addContestCtrl">
+    <h3>新建擂台
+    </h3>
+    <div class="panel panel-default">
+        <form class="form-validate form-horizontal have-padding-l-r"  style="margin-top: 20px" name="updateForm" ng-submit="submitForm(updateForm.$valid)">
+            <div class="panel panel-primary no-padding-l-r">
+                <div class="panel-heading"><h4 class="text-center">擂台详情</h4></div>
+                <div class="panel-body">
+                    <div class="input-group col-sm-6" style="margin-bottom: 20px">
+                        <span class="input-group-addon">标题 : </span>
+                        <input type="text" class="form-control" placeholder="标题" name="title" ng-model="title" required>
+                    </div>
+                    <p class="redBorder" ng-if="updateForm.title.$error.required && updateForm.title.$touched">输入不能为空</p>
+                    <div class="input-group col-sm-6" style="margin-bottom: 20px">
+                        <span class="input-group-addon">作者 : </span>
+                        <input type="text" class="form-control" autocomplete="off" placeholder="作者" name="name" ng-model="name" ng-change="userChange()" required ng-focus="userType = true" ng-blur="hideUl()">
+                        <ul ng-show="userType" class="user-ul-style">
+                            <li ng-repeat="userItem in userList" class="user-li-style" ng-click="changeName(userItem.user.name,userItem.user.userId)">
+                                <a class="cursor-p"><img err-src="./app/img/error-err.png" style="height:30px; border-radius: 50%; " ng-src="{{userItem.user.headURL}}"/></a>
+                                {{userItem.user.name}}
+                            </li>
+                            <li ng-show="userType && !userList.length">没有找到相关用户</li>
+                        </ul>
+                        <span style="width:200px" class="input-group-addon">发布方式 :
+                            <span style="display: inline-block"><input class="pull-left" type="radio"  class="form-control" placeholder="实名" name="type" value="1" ng-model="isAnonymous" ng-disabled="true"><span class="pull-left">实名</span></span>
+                            <span style="display: inline-block"><input class="pull-left" type="radio" ng-checked="true" class="form-control" placeholder="匿名" name="type" value="2" ng-model="isAnonymous" ng-disabled="true"><span class="pull-left">匿名</span></span>
+                        </span>
+                    </div>
+                    <p class="redBorder" ng-if="updateForm.name.$error.required && updateForm.name.$touched">输入不能为空</p>
+                    <div class="form-group col-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon">内容 : </span>
+                            <textarea  style="resize: none;" placeholder="内容" class="form-control" rows="8" name="content" ng-model="content" required></textarea>
+                        </div>
+                        <p class="redBorder" ng-if="updateForm.content.$error.required && updateForm.content.$touched">输入不能为空</p>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <div class="input-group col-sm-6">
+                            <span class="input-group-addon">正方 : </span>
+                            <input type="text" class="form-control" placeholder="观点" name="obverse" ng-model="obverse" required>
+                        </div>
+                        <p class="redBorder" ng-if="updateForm.obverse.$error.required && updateForm.obverse.$touched">输入不能为空</p>
+                        <div class="input-group col-sm-6">
+                            <span class="input-group-addon">反方 : </span>
+                            <input type="text" class="form-control" placeholder="观点" name="reverse" ng-model="reverse" required>
+                        </div>
+                        <p class="redBorder" ng-if="updateForm.reverse.$error.required && updateForm.reverse.$touched">输入不能为空</p>
+                    </div>
+                </div>
+            </div>
+            <!-- START panel-->
+            <div class="panel panel-default" style="border: none;">
+                <div class="panel-body">
+                </div>
+            </div>
+            <!-- END panel-->
+            <fieldset>
+                <div class="panel panel-danger col-sm-12 no-padding-l-r ">
+                    <div class="panel-heading"><h4 class="text-center">话题的领域</h4></div>
+                    <div class="panel-body">
+                        <label class="my-checkbox" ng-repeat="userItem in realmList" ng-click="userItem.fnChecked = !userItem.fnChecked" ng-class="userItem.fnChecked?'my-checkbox my-checkbox_active_l':'my-checkbox'">
+                            <span>{{userItem.name}}</span>
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <button class="btn btn-primary btn-lg center-block big-font">发布</button>
+            </fieldset>
+        </form>
+    </div>
+</div>

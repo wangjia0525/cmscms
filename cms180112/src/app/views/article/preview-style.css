@@ -1,0 +1,207 @@
+body,ul,li,a,img,p,h1,h2,h3,h4,input,form,button{padding:0;margin:0;border:0;list-style: none;}
+
+body{margin: 0 auto;padding-top: 20px; font-family:"微软雅黑",Arial;position: relative;word-break:break-all;max-width: 640px;min-width: 320px;background: #FFFFFF;}
+.clear:after {
+	clear:both;
+	content:'.';
+	display: block;
+	visibility:hidden;
+	height:0;
+	overflow:hidden; }
+.clear{
+	zoom:1;
+	clear:both;
+}
+.article-title p{font-size:1.25em;line-height: 1.5em;padding: 0 12px;text-align: left;font-weight: bold}
+.article-content{font-size: 1em;margin:20px 0 20px;padding:0 10px;color: #000000;}
+.article-time {
+	margin: 20px 12px 20px 12px;
+	font-size:.75em;
+	/*text-indent: 0.75em;*/
+	color:#4e4e4e;
+	float: left;
+}
+.article-yue {
+	margin: 20px 0;
+	font-size:.75em;
+	/*text-indent: 0.75em;*/
+	color: #4e4e4e;
+	float: left;
+}
+.zhaiyao{
+	padding:5px 10px;
+	font-size: .9em;
+	line-height: 1.3em;
+	background-color: #F6F6F6;
+	margin:0 12px;
+	border-radius: 3px;
+	color:#4e4e4e;
+}
+.laiyuan{
+	margin:0 12px;
+	color:#4e4e4e;
+	font-size:.75em;
+}
+
+
+/*8888888888888888888888888888888888*/
+.article-zan1{
+	margin: 0 10px 20px 10px;
+}
+.article-zan{
+	color:#b6b6b6;
+}
+.article-zan img{
+	width: 18px;
+	height: 18px;
+	right: 40px;
+
+}
+.article-zan p{
+	right: 20px;
+	font-size:.75em;
+	line-height: 1em;
+	color:#4e4e4e;
+}
+
+/*内容*/
+.article-content img {
+	max-width: 100%;
+	display: block;
+	margin: 0 auto;
+}
+.article-content video {
+	max-width: 100% !important;
+	display: block;
+	margin: 0 auto;
+}
+.user-comment{
+
+	margin: 0 10px;
+	border-left: #fb4b4e solid 0.4em;
+	padding-left: 5px;
+	color:#b6b6b6 ;
+}
+.comment-title{color:#595959;}
+.comment-list{
+	margin: 20px 10px 120px 10px;
+}
+
+.comment-top{
+	margin: 10px 0;
+
+}
+
+.user-name{
+	color:#a1a1a1;
+	float: left;
+}
+.comment-hot{
+	margin-left: 20px;
+	width: 20px;
+	height: 20px;
+	vertical-align: bottom;
+}
+.comment-zan {
+	right: 20px;
+	float: right;
+}
+.comment-zan img{
+	width: 18px;
+	height: 18px;
+}
+.comment-bottom{
+	margin-top: 40px;
+}
+.comment-time{
+	color:#a1a1a1;
+	font-size: 0.8em;
+	margin: 10px 0;
+}
+
+.comment-div{
+	clear: both;
+	height: 100%;
+	overflow: auto;
+}
+
+.user-all{
+	color: #a1a1a1;
+	text-align: center;
+	font-size: 0.8em;
+}
+#footer{
+	width:100%;
+	box-sizing: border-box;
+	border-top:0.15em solid #cbcaca;
+	padding:10px;
+	position: fixed;
+	z-index: 100;
+	left: 0;
+	bottom: 0;
+	background: #ededed;
+	overflow: hidden;
+}
+#footer-ping{
+	background: #d8d8d8;
+	line-height: 3.75em;
+	border-radius: 0.3em;
+	float: left;
+	padding: 0 20px;
+	width: 50%;
+	border:0 solid #d8d8d8;
+	display: inline-block;
+
+}
+#footer-button{
+	width: 20%;
+	float: right;
+	border:0.18em solid #fb4d50;
+	line-height: em;
+	display: none;
+	border-radius: 0.3em;
+	line-height: 2.8em;
+	text-align: center;
+	color: #fb4d50;
+	margin-right: 5%;
+}
+
+.open-comment{
+	display: inline-block;
+	margin: 5px;
+	border: 2px solid #d8d8d8;
+	padding: 5px 5px 2px 5px;
+	border-radius: 8px;
+	float:right;
+}
+.click-zan{
+	display: inline-block;
+	margin: 5px;
+	border: 2px solid #d8d8d8;
+	padding: 5px 5px 2px 5px;
+	border-radius: 8px;
+	float:right;
+}
+.comment-total{
+	position: absolute;
+	top: 5px;
+	margin-left: 20px;
+	border-radius: 13px;
+	background-color: red;
+	width: 25px;
+	height: 25px;
+	color: white;
+	text-align: center;
+	font-size: 15px;
+	line-height: 25px;
+}
+input::-webkit-input-placeholder{ color:#FFF;font-size:14px;}
+input::-webkit-input-placeholder {color:#FFF;font-size:14px;}
+input:-moz-placeholder {color:#FFF;font-size:14px;}
+input::-moz-placeholder {color:#FFF;font-size:14px;
+}
+input:-ms-input-placeholder{color:#FFF;font-size:14px;
+}
+.clear-float{
+	clear: both;
+}

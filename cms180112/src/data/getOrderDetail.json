@@ -1,0 +1,56 @@
+{
+	"err": {
+		"code": 0,
+		"msg": "正常",
+		"eventId": "xxxx-xxxx-xxxx"
+	},
+	"order": {
+		"orderId": 1,
+		"orderNum": "201606041659591",
+		"sectionId": 1,
+		"productId": 1,
+		"userId": 3,
+		"status": 4,
+		"name": "张三",
+		"amount": 26,
+		"zhouqi": "一年",
+		"finalAmount": 10,
+		"finalZhouqi": "8个月",
+		"finalJifen": 2,
+		"finalIncome": 25,
+		"finalLixichengben": "10%",
+		"finalLixi": "9%",
+		"finalLoanLixi": "8%",
+		"finalBeginDate": "2015-02-23",
+		"finalEndDate": "2015-02-23",
+		"failReason": "信息填写错误",
+		"updateTime": "2015-02-23",
+		"createTime": "2015-02-23",
+		"fangchanzhengList": [
+			"./app/img/lang_yie_ar_kung_fu.jpg",
+			"./app/img/lang_yie_ar_kung_fu.jpg",
+			"./app/img/lang_yie_ar_kung_fu.jpg",
+			"./app/img/lang_yie_ar_kung_fu.jpg"
+		],
+		"shenfenzhengList": [
+			"./app/img/lang_yie_ar_kung_fu.jpg",
+			"./app/img/lang_yie_ar_kung_fu.jpg"
+		]
+	},
+	"product": {
+		"productId": 1,
+		"sectionId": 1,
+		"name": "优质客户高收益",
+		"picUrl": "img/borderlands_tiny_tina.jpg",
+		"diyaType": "一抵",
+		"introUrl": "www.baidu.com",
+		"jixiType": "日息",
+		"lixi": 0.78,
+		"lixichengben": 2,
+		"leijishouyi": "154654161",
+		"jifen": 1232,
+		"maidian": "卖点1 好看 好靓 好晒",
+		"color": "#FF0000",
+		"zhouqi": "12月 一年 八年"
+	}
+}

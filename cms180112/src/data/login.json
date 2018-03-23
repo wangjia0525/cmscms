@@ -1,0 +1,20 @@
+{
+	"err": {
+		"code": 0,
+		"msg": "正常",
+		"eventId": ""
+	},
+	"role": {
+		"roleId": 1,
+		"name": "admin",
+		"type": 1,
+		"introduce": "超级管理员"
+	},
+	"token": "a32fbbf493c5cbf2048df1779653e315",
+	"user": {
+		"cmsuserId": 1,
+		"name": "vradmin",
+		"status": 1,
+		"createTime": "2016-04-06 09:48:42"
+	}
+}

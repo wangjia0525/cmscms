@@ -1,0 +1,35 @@
+{
+  "err": {
+    "code": 0,
+    "msg": "正常",
+    "eventId": "xxxx-xxxx-xxxx"
+  },
+  "result": {
+    "productId": 1,
+    "name": "产品标题产品标题产品标题产品标题产品标题产品标题产品标题产品标题产品标题产品标题产品标题产品标题产品标题产品标题",
+    "userId": 100,
+    "user": {
+      "name": "用户1",
+      "phoneNo":123991919
+    },
+    "label": "头衔",
+    "digest": "简介",
+    "headImage": "http://img1.gtimg.com/ninja/2/2016/12/ninja148153600158327.jpg",
+    "image": "http://img1.gtimg.com/ninja/2/2016/12/ninja148129296747717.jpg",
+    "synopsis": "课程介绍",
+    "authorInfo": "作者介绍",
+    "price": 1000,
+    "basisData": 200,
+    "totalLookNum": 100,
+    "status": 2,
+    "createtime": "2016-09-09 23：00：00",
+    "updatetime": "2016-09-09 23：00：00",
+    "buyData": 122,
+    "evaluate": 22,
+    "sequence": 222,
+    "ispay": true,
+    "lessonNum": 200,
+    "pubLessonNum": 3000,
+    "isComment": false
+  }
+}

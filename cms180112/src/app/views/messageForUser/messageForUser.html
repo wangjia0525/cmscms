@@ -1,0 +1,160 @@
+
+<!--
+	user list !
+-->
+<h3>CMS用户通知
+    <small>CMS用户通知</small>
+</h3>
+<div ng-controller="messageForUserCtrl" >
+    <form  name="updateForm1" ng-submit="submitForm1(updateForm1.$valid)">
+        <table style="width:60%;text-align:left;border:1px solid #ddd;float: left" class="table">
+            <tbody>
+                <tr style="background-color: #ddd">
+                    <td colspan="3" style="text-align: left">成长小助手</td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align: left">
+                        <span>通知文案：</span>
+                        <textarea ng-disabled="onOff1?false:true" ng-maxlength="100" style="resize: vertical" rows="1" cols="50" class="form-control" name="copyForAssistant" ng-model="copyForAssistant" placeholder="" required></textarea>
+                        <p class="redBorder" ng-if="updateForm1.copyForAssistant.$error.required && updateForm1.copyForAssistant.$touched">输入不能为空</p>
+                        <p class="redBorder" ng-if="updateForm1.copyForAssistant.$error.maxlength && updateForm1.copyForAssistant.$touched">不能超过100字符</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align: left">
+                        <span>通知邮箱：</span>
+                        <textarea ng-disabled="onOff1?false:true" ng-maxlength="500" style="resize: vertical" rows="3" cols="50" class="form-control" name="emailForAssistant" ng-model="emailForAssistant" placeholder="邮箱用 ， 隔开"></textarea>
+                        <!--<p class="redBorder" ng-if="updateForm.emailForAssistant.$error.required && updateForm.emailForAssistant.$touched">输入不能为空</p>-->
+                        <p class="redBorder" ng-if="updateForm1.emailForAssistant.$error.maxlength && updateForm1.emailForAssistant.$touched">不能超过500字符</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td><div ng-click="onOff1=true"  class="btn btn-warning">编辑</div></td>
+                    <td><button  ng-click="onOff1=false"   class="btn btn-primary">发送</button></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    <form  name="updateForm2" ng-submit="submitForm2(updateForm2.$valid)" >
+        <table style="width:60%;text-align:left;border:1px solid #ddd;float: left" class="table">
+            <tbody>
+            <tr style="background-color: #ddd">
+                <td colspan="3" style="text-align: left">举报投诉</td>
+            </tr>
+            <tr>
+                <td colspan="3" style="text-align: left">
+                    <span>通知文案：</span>
+                    <textarea ng-disabled="onOff2?false:true" ng-maxlength="100" style="resize: vertical" rows="1" cols="50" class="form-control" name="copyForComplaints" ng-model="copyForComplaints" placeholder="" required></textarea>
+                    <p class="redBorder" ng-if="updateForm2.copyForComplaints.$error.required && updateForm2.copyForComplaints.$touched">输入不能为空</p>
+                    <p class="redBorder" ng-if="updateForm2.copyForComplaints.$error.maxlength && updateForm2.copyForComplaints.$touched">不能超过100字符</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" style="text-align: left">
+                    <span>通知邮箱：</span>
+                    <textarea ng-disabled="onOff2?false:true" ng-maxlength="500" style="resize: vertical" rows="3" cols="50" class="form-control" name="emailForComplaints" ng-model="emailForComplaints" placeholder="邮箱用 ， 隔开"></textarea>
+                    <!--<p class="redBorder" ng-if="updateForm.emailForAssistant.$error.required && updateForm.emailForAssistant.$touched">输入不能为空</p>-->
+                    <p class="redBorder" ng-if="updateForm2.emailForComplaints.$error.maxlength && updateForm2.emailForComplaints.$touched">不能超过500字符</p>
+                </td>
+            </tr>
+            <tr>
+                <td><div ng-click="onOff2=true"  class="btn btn-warning">编辑</div></td>
+                <td><button  ng-click="onOff2=false"   class="btn btn-primary">发送</button></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <form  name="updateForm3" ng-submit="submitForm3(updateForm3.$valid)"  >
+        <table style="width:60%;text-align:left;border:1px solid #ddd;float: left" class="table">
+            <tbody >
+            <tr style="background-color: #ddd">
+                <td colspan="3" style="text-align: left">结算管理</td>
+            </tr>
+            <tr>
+                <td colspan="3" style="text-align: left">
+                    <span>通知文案：</span>
+                    <textarea ng-disabled="onOff3?false:true" ng-maxlength="100" style="resize: vertical" rows="1" cols="50" class="form-control" name="copyForAccount" ng-model="copyForAccount" placeholder="" required></textarea>
+                    <p class="redBorder" ng-if="updateForm3.copyForAccount.$error.required && updateForm2.copyForAccount.$touched">输入不能为空</p>
+                    <p class="redBorder" ng-if="updateForm3.copyForAccount.$error.maxlength && updateForm2.copyForAccount.$touched">不能超过100字符</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" style="text-align: left">
+                    <span>通知邮箱：</span>
+                    <textarea ng-disabled="onOff3?false:true" ng-maxlength="500" style="resize: vertical" rows="3" cols="50" class="form-control" name="emailForAccount" ng-model="emailForAccount" placeholder="邮箱用 ， 隔开"></textarea>
+                    <!--<p class="redBorder" ng-if="updateForm.emailForAssistant.$error.required && updateForm.emailForAssistant.$touched">输入不能为空</p>-->
+                    <p class="redBorder" ng-if="updateForm3.emailForAccount.$error.maxlength && updateForm3.emailForAccount.$touched">不能超过500字符</p>
+                </td>
+            </tr>
+            <tr>
+                <td><div ng-click="onOff3=true"  class="btn btn-warning">编辑</div></td>
+                <td><button  ng-click="onOff3=false"   class="btn btn-primary">发送</button></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <form  name="updateForm4" ng-submit="submitForm4(updateForm4.$valid)"  >
+        <table style="width:60%;text-align:left;border:1px solid #ddd;float: left" class="table">
+            <tbody >
+            <tr style="background-color: #ddd">
+                <td colspan="3" style="text-align: left">发票管理</td>
+            </tr>
+            <tr>
+                <td colspan="3" style="text-align: left">
+                    <span>通知文案：</span>
+                    <textarea ng-disabled="onOff4?false:true" ng-maxlength="100" style="resize: vertical" rows="1" cols="50" class="form-control" name="copyForInvoice" ng-model="copyForInvoice" placeholder="" required></textarea>
+                    <p class="redBorder" ng-if="updateForm4.copyForInvoice.$error.required && updateForm4.copyForInvoice.$touched">输入不能为空</p>
+                    <p class="redBorder" ng-if="updateForm4.copyForInvoice.$error.maxlength && updateForm4.copyForInvoice.$touched">不能超过100字符</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" style="text-align: left">
+                    <span>通知邮箱：</span>
+                    <textarea ng-disabled="onOff4?false:true" ng-maxlength="500" style="resize: vertical" rows="3" cols="50" class="form-control" name="emailForInvoice" ng-model="emailForInvoice" placeholder="邮箱用 ， 隔开"></textarea>
+                    <!--<p class="redBorder" ng-if="updateForm.emailForAssistant.$error.required && updateForm.emailForAssistant.$touched">输入不能为空</p>-->
+                    <p class="redBorder" ng-if="updateForm4.emailForInvoice.$error.maxlength && updateForm4.emailForInvoice.$touched">不能超过500字符</p>
+                </td>
+            </tr>
+            <tr>
+                <td><div ng-click="onOff4=true"  class="btn btn-warning">编辑</div></td>
+                <td><button  ng-click="onOff4=false"   class="btn btn-primary">发送</button></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <form  name="updateForm5" ng-submit="submitForm5(updateForm5.$valid)"  >
+        <table style="width:60%;text-align:left;margin-bottom:80px;border:1px solid #ddd;float: left" class="table">
+            <tbody >
+            <tr style="background-color: #ddd">
+                <td colspan="3" style="text-align: left">未审核文章</td>
+            </tr>
+            <tr>
+                <td colspan="3" style="text-align: left">
+                    <span>通知文案：</span>
+                    <textarea ng-disabled="onOff5?false:true" ng-maxlength="100" style="resize: vertical" rows="1" cols="50" class="form-control" name="copyForNot" ng-model="copyForNot" placeholder="" required></textarea>
+                    <p class="redBorder" ng-if="updateForm5.copyForNot.$error.required && updateForm5.copyForNot.$touched">输入不能为空</p>
+                    <p class="redBorder" ng-if="updateForm5.copyForNot.$error.maxlength && updateForm5.copyForNot.$touched">不能超过100字符</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" style="text-align: left">
+                    <span>通知邮箱：</span>
+                    <textarea ng-disabled="onOff5?false:true" ng-maxlength="500" style="resize: vertical" rows="3" cols="50" class="form-control" name="emailForNot" ng-model="emailForNot" placeholder="邮箱用 ， 隔开"></textarea>
+                    <!--<p class="redBorder" ng-if="updateForm.emailForAssistant.$error.required && updateForm.emailForAssistant.$touched">输入不能为空</p>-->
+                    <p class="redBorder" ng-if="updateForm5.emailForNot.$error.maxlength && updateForm5.emailForNot.$touched">不能超过500字符</p>
+                </td>
+            </tr>
+            <tr>
+                <td><div ng-click="onOff5=true"  class="btn btn-warning">编辑</div></td>
+                <td><button  ng-click="onOff5=false"   class="btn btn-primary">发送</button></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+
+</div>

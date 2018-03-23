@@ -1,0 +1,12 @@
+<div class="panel">
+	<div class="panel-heading">
+		<h4 class="modal-title" ng-bind-html="modal_title_with_btn"></h4>
+	</div>
+	<div class="panel-body">
+		<p ng-bind-html="modal_content_with_btn"></p>
+	</div>
+	<div class="panel-footer bg-white text-right">
+		<button type="button" class="btn btn-default" ng-click="closeThisDialog()">关闭</button>
+		<button type="button" class="btn btn-primary" ng-click="sure()">确认</button>
+	</div>
+</div>

@@ -1,0 +1,90 @@
+<!--
+	a mobileUser detail !
+-->
+<div ng-controller="addTopicCtrl">
+    <h3>新建话题
+    </h3>
+    <div class="panel panel-default">
+        <form class="form-validate form-horizontal have-padding-l-r"  style="margin-top: 20px" name="updateForm" ng-submit="submitForm(updateForm.$valid)">
+            <div class="panel panel-primary no-padding-l-r">
+                <div class="panel-heading"><h4 class="text-center">话题详情</h4></div>
+                <div class="panel-body">
+                    <div class="input-group col-sm-6" style="margin-bottom: 20px">
+                        <span class="input-group-addon">标题 : </span>
+                        <input type="text" class="form-control" placeholder="标题" name="title" ng-model="title" required>
+                    </div>
+                    <p class="redBorder" ng-if="updateForm.title.$error.required && updateForm.title.$touched">输入不能为空</p>
+                    <div class="input-group col-sm-6" style="margin-bottom: 20px">
+                        <span class="input-group-addon">作者 : </span>
+                        <input type="text" class="form-control" autocomplete="off" placeholder="作者" name="name" ng-model="name" ng-change="userChange()" required ng-focus="userType = true" ng-blur="hideUl()">
+                        <ul ng-show="userType" class="user-ul-style">
+                            <li ng-repeat="userItem in userList" class="user-li-style" ng-click="changeName(userItem.user.name,userItem.user.userId)">
+                                <a class="cursor-p"><img err-src="./app/img/error-err.png" style="height:30px; border-radius: 50%; " ng-src="{{userItem.user.headURL}}"/></a>
+                                {{userItem.user.name}}
+                            </li>
+                            <li ng-show="userType && !userList.length">没有找到相关用户</li>
+                        </ul>
+                        <span class="input-group-addon" style="padding-right: 30px">发布方式 :
+                            <span style="display: inline-block"><input class="pull-left" type="radio" class="form-control" placeholder="实名" name="type" value="1" ng-model="isAnonymous" required><span class="pull-left">实名</span></span>
+                            <span style="display: inline-block"><input class="pull-left" type="radio" class="form-control" placeholder="匿名" name="type" value="2" ng-model="isAnonymous" required><span class="pull-left">匿名</span></span>
+                        </span>
+                    </div>
+                    <p class="redBorder" ng-if="updateForm.name.$error.required && updateForm.name.$touched">输入不能为空</p>
+                    <div class="form-group col-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon">内容 : </span>
+                            <textarea  style="resize: none;" placeholder="内容" class="form-control" rows="8" ng-model="content" name="content" required></textarea>
+                        </div>
+                        <p class="redBorder" ng-if="updateForm.content.$error.required && updateForm.content.$touched">输入不能为空</p>
+                    </div>
+                </div>
+            </div>
+            <!-- START panel-->
+            <div class="panel panel-default" style="border: none;">
+                <div class="panel-body">
+                </div>
+            </div>
+            <!-- END panel-->
+            <fieldset>
+                <div class="panel panel-danger col-sm-12 no-padding-l-r ">
+                    <div class="panel-heading"><h4 class="text-center">话题的领域</h4></div>
+                    <div class="panel-body">
+                        <label class="my-checkbox" ng-repeat="userItem in realmList" ng-click="userItem.fnChecked = !userItem.fnChecked" ng-class="userItem.fnChecked?'my-checkbox my-checkbox_active_l':'my-checkbox'">
+                            <span>{{userItem.name}}</span>
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset ng-show="!topicId">
+            <!--<fieldset>-->
+                <button class="btn btn-primary center-block">下一步</button>
+            </fieldset>
+        </form>
+        <fieldset ng-show="topicId" style="margin-left: 20px">
+        <!--<fieldset style="margin-left: 20px">-->
+            <span>选择图片</span>
+            <fieldset>
+                <div class="topic-div" ng-repeat="item in imgList" id="{{item.id}}">
+                    <img class="topic-img" ng-src="{{item.src}}" alt="...">
+                    <div ng-if="item.x" class="topic-delete" ng-click="deleteImg($index)">X</div>
+                    <div ng-if="item.wrap" class="topic-wrap">{{item.info}}</div>
+                </div>
+                <div ng-show="btnshowhide" id="updateImgs"  class="topic-div" style="background: #ffffff">
+                    <div class="topic-img">
+                        <svg id="plus-icon" data-name="plus-icon" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+                            <defs>
+                                <style>
+                                    .cls-1 {
+                                        fill: #eee;
+                                    }
+                                </style>
+                            </defs>
+                            <polygon class="cls-1" points="79 47 53 47 53 21 47 21 47 47 20 47 20 53 47 53 47 80 53 80 53 53 79 53 79 47"/>
+                        </svg>
+                    </div>
+                </div>
+            </fieldset>
+            <button ng-disabled="btnshowhide1" class="btn btn-primary center-block" id="btnOnOff">{{btnType}}</button>
+        </fieldset>
+    </div>
+</div>

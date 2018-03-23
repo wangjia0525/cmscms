@@ -1,0 +1,12 @@
+{
+	"err": {
+		"code": 0,
+		"msg": "正常",
+		"eventId": "xxxx-xxxx-xxxx"
+	},
+	"dayLoginCount": [100, 200, 300, 23, 23, 45, 56],
+	"dayTopicCount": [100, 200, 300, 23, 23, 45, 56],
+	"dayArenaCount": [100, 200, 300, 23, 23, 45, 56],
+	"dayTopicFavoriteCount": [100, 200, 300, 23, 23, 45, 56],
+	"dayArenaFavoriteCount": [100, 200, 300, 23, 23, 45, 56]
+}

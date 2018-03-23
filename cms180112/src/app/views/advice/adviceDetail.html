@@ -1,0 +1,57 @@
+<!--
+	作者：495246490@qq.com
+	时间：2016-04-22
+	描述：adviceDetail
+-->
+<h3>
+   	意见反馈详情
+   <small>意见反馈详情</small>
+</h3>
+<div ng-controller="adviceDetailCtrl" class="panel panel-default">
+   <table class="table table-striped">
+      <thead>
+         <tr>
+            <!--<th colspan="2" class="h4">Powered by AngularJS
+               <span class="mh">-</span>
+               <small>by
+                  <a href="">
+                     <strong>{{adviceDetail.user.name}}</strong>
+                  </a>on
+                  <em>March 10, 2015</em>
+               </small>
+            </th>-->
+         </tr>
+      </thead>
+      <tbody>
+         <tr>
+            <td class="text-center">
+               <a href="">
+                  <strong>{{adviceDetail.user.name}}</strong>
+               </a>
+            </td>
+            <td class="text-right">
+               <em>{{adviceDetail.createTime}}</em>
+            </td>
+         </tr>
+         <tr>
+            <td style="width: 15%;" class="text-center">
+               <div class="mt">
+                  <a href="">
+                     <img ng-src="{{adviceDetail.user.headURL}}" alt="用户头像" class="img-circle thumb64" />
+                  </a>
+               </div>
+               <small>{{adviceDetail.user.userId}}</small>
+               <br/>
+               <small>{{adviceDetail.user.phoneNo}}</small>
+            </td>
+            <td>
+               <p style="word-break: break-all;">{{adviceDetail.advice}}</p>
+               <div class="text-right">
+                  <a ng-disabled="adviceDetail.status==2" class="btn btn-square btn-primary" ng-click="doAdvice()"><i class="fa fa-check"></i> 解决</a>
+               </div>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div>
+

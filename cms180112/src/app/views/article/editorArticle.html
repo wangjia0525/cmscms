@@ -1,0 +1,142 @@
+
+<!--
+	user list !
+-->
+
+
+<h3>内容管理
+    <small>文章管理</small>
+</h3>
+<div  ng-controller="editorArticleCtrl" class="panel panel-default">
+    <form class="form-validate form-horizontal"  name="updateForm" ng-submit="submitForm(updateForm.$valid)">
+        <div class="panel-heading">
+            <fieldset style="padding:0;margin:0">
+                <div class="panel panel-danger col-lg-8 no-padding-l-r">
+                    <div class="panel-heading"><h4 class="text-center">文章的标签</h4></div>
+                    <div class="panel-body">
+                        <label class="my-checkbox" ng-repeat="userItem in realmList" ng-click="userItem.fnChecked = !userItem.fnChecked" ng-class="userItem.fnChecked?'my-checkbox my-checkbox_active_l':'my-checkbox'" >
+                            <span>{{userItem.name}}</span>
+                        </label>
+                        <label style="color:#CFCFCF">必填项</label>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="panel-body " style="border-top: 1px solid #CFDBE2;">
+            <div class="input-group">
+                <select ng-disabled="true" class="custom-css form-control"  ng-model="articleSelectValue" ng-options="articleSelectValue._value_ for articleSelectValue in articleType" >
+                </select>
+            </div>
+
+            <input ng-keyup="checkLen(title)" style="margin-top:10px;width:60%;display: inline" type="text" class="form-control" placeholder="请在这里输入标题(不超过50字符)" name="title" ng-model="title" required>
+            <span id="countShow">您还可以输入50个文字</span>
+            <p class="redBorder" ng-if="updateForm.title.$error.required && updateForm.title.$touched">输入不能为空</p>
+            <p class="redBorder" ng-if="updateForm.title.$error.maxlength && updateForm.title.$touched">不能超过50字</p>
+            <div>
+                <div style="margin-top: 10px">
+                    <label ng-click="isTrue()">
+                        <input  type="radio"  name="user"  value="1"  ng-model="type" >
+                        作者为平台用户
+                    </label>
+                </div>
+                <fieldset style="margin-top:10px;" ng-hide="isPlat">
+                    <div class="col-sm-3">
+                        <input type="text"   name="phone" autocomplete="off"   ng-model="phone" ng-change="userChange()"   class="form-control" placeholder="用户名/手机号"  ng-required="!isPlat" ng-focus="userType = true" ng-blur="hideUl()">
+                        <ul ng-show="userType" class="userUlStyle1">
+                            <li ng-repeat="userItem in userList" class="user-li-style" ng-click="changeName(userItem.user.name,userItem.user.userId)">
+                                <a class="cursor-p"><img err-src="./app/img/error-err.png" style="height:30px; border-radius: 50%; " ng-src="{{userItem.user.headURL}}"/></a>
+                                {{userItem.user.name}}
+                            </li>
+                            <li ng-show="userType && !userList.length">没有找到相关用户</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <input placeholder="相应用户"  ng-disabled="true" name="userName" ng-model="userName" type="text" class="form-control" ng-required="!isPlat">
+                    </div>
+                    <p class="redBorder" ng-if="updateForm.phone.$error.required && updateForm.phone.$touched">输入不能为空</p>
+                    <p class="redBorder" ng-if="updateForm.userName.$error.required">没有找到相应用户</p>
+                </fieldset>
+                <div style="margin:10px 0">
+                    <label ng-click="isNotTrue()">
+                        <input type="radio"  name="user"  value="0"   ng-model="type" >
+                        作者非平台用户
+                    </label>
+                </div>
+                <div class="col-sm-3">
+                    <input placeholder="请输入作者姓名" ng-maxlength="10" ng-hide="isNotPlat" ng-disabled="isNotPlat" name="uName" ng-model="uName"  type="text" class="form-control" ng-required="!isNotPlat">
+                </div>
+                <p class="redBorder" ng-if="updateForm.uName.$error.required && updateForm.uName.$touched">输入不能为空</p>
+                <p class="redBorder" ng-if="updateForm.uName.$error.maxlength && updateForm.uName.$touched">不能超过10字</p>
+
+            </div>
+        </div>
+        <fieldset ng-show="true" style="margin-left:10px;">
+            <div class="input-group">
+                <img style="margin-top: 20px" ng-hide="banner.pic" ng-src="{{banner.picUrl}}" class="uib" err-src="app/img/fengmian.png" alt="缩略图图片" title="更换图片"/>
+                <img  ng-class="banner.pic==''?'':'uib img-thumbnail' "  ngf-src="banner.pic" ngf-background="banner.pic" required/>
+            </div>
+            <button style="margin-top: 20px" class="btn btn-primary" ngf-select ng-model="banner.pic" ng-change="change()" ngf-pattern="'image/*'"  ngf-max-size="2MB" ngf-min-height="1" required>选择封面图片(像素702*320)</button >
+            <!--<div>-->
+                <!--<img id="titleImg" style="height: 320px;width: 702px; line-height: 320px;text-align: center" class="img-thumbnail" src="" alt="课程封面（702*320）">-->
+            <!--</div>-->
+            <!--<button id="titleBtn" style="margin-top: 20px;margin-left: 15px;" class="btn btn-primary">选择封面图片(像素702*320)</button>-->
+        </fieldset>
+        <fieldset style="margin-left:10px;">
+            <div class="col-sm-4" style="margin-top:10px;padding-left:0">
+                <label>
+                    <input class="pull-left"  type="radio" name="abs" value="1" ng-model="abNum" required>显示摘要
+                </label>
+                <label>
+                    <input class="pull-left"  type="radio"  name="abs" value="0" ng-model="abNum" required>不显示摘要
+                </label>
+            </div>
+        </fieldset>
+        <fieldset style="margin-left:10px;">
+            <div class="col-sm-6">
+                <textarea ng-keyup="checkLen1(abstracts)"  placeholder="摘要(必填，120字以内)"  style="resize: vertical;display: inline" rows="3" cols="40" class="form-control" ng-model="abstracts" name="abstracts" required></textarea>
+                <span id="countShow1">您还可以输入120个文字</span>
+                <p class="redBorder" ng-if="updateForm.abstracts.$error.required && updateForm.abstracts.$touched">输入不能为空</p>
+                <p class="redBorder" ng-if="updateForm.abstracts.$error.maxlength && updateForm.abstracts.$touched">不能超过120字</p>
+            </div>
+        </fieldset>
+        <fieldset style="margin-left:10px;">
+            <!--<textarea id="TextArea1" ng-model="ckeditor"  cols="20" rows="2"  class="ckeditor"></textarea>-->
+                <script id="editor" type="text/plain" style="width:95%;height:300px;"></script>
+        </fieldset>
+        <fieldset style="margin-left:10px;">
+            <input style="margin-top:10px;width:60%" type="text" ng-maxlength="100" class="form-control" placeholder="来源(选填)" name="source" ng-model="source" >
+            <p class="redBorder" ng-if="updateForm.source.$error.maxlength && updateForm.source.$touched">不能超过100字</p>
+            <div class="input-group"  style="margin-top:10px">
+                <!--<label>定时发送时间：</label>
+                <input type="text"  class="form-control" placeholder="yyyy-MM-dd HH:mm" ng-model="Timing"  >-->
+                <label for="finalBeginDate">定时发送日期 : <input type="checkbox" ng-checked="false" ng-model="Timing"></label>
+                <p class="input-group col-sm-8">
+                    <input  type="text" datepicker-popup="{{format}}" ng-model="finalBeginDate.date" is-open="finalBeginDate.opened" min-date="minDate"   datepicker-options="dateOptions" ng-required="true" close-text="Close" class="form-control" style="width: auto" />
+                    <span class="input-group-btn">
+                        <button style="height:35px"  type="button" ng-click="openFinalBeginDate($event)" class="btn btn-default">
+                            <em class="fa fa-calendar"></em>
+                        </button>
+                    </span>
+                </p>
+            </div>
+        </fieldset>
+        <fieldset>
+            <button style="margin-left: 40%" class="btn btn btn-info ">保存草稿</button>
+            <div class="btn btn-success " ng-click="fabu()">发布</div>
+            <div  class="btn btn-primary "  style="background-color:#5FD1ED;"  ng-click="articlePreview()">扫一扫</div>
+            <b  class="btn  btn-primary" id="btn-preview" >预览</b>
+        </fieldset>
+    </form>
+    <!--<button ng-click="articlePreviewIn()" style="margin-bottom:10px;"  class="btn btn-success btn-lg center-block big-font">预 览</button>-->
+    <div class="preview-layer">
+        <div class="preview-bg"></div>
+        <div class="fabu">
+            <button ng-click="close()" class="button2">关闭</button>
+            <br/>
+            <button ng-click="fabu()" class="button3">发布</button>
+        </div>
+        <div style="top:0" class="preview-phone">
+            <iframe id="preview-html" name="preview-html" src="app/views/article/preview-h5.html"></iframe>
+        </div>
+    </div>
+</div>
