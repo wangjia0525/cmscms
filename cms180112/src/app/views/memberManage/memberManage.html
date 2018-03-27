@@ -1,0 +1,44 @@
+
+<!--
+	user list !
+-->
+<h3>{{rootColumnName}}
+    <small>{{rootColumnPrompt}}</small>
+</h3>
+<div ng-controller="memberManageCtrl" class="panel panel-default">
+    <form class="form-validate form-horizontal"  name="updateForm" ng-submit="submitForm(updateForm.$valid)">
+        <fieldset style="margin-top:30px;">
+            <div class="input-group col-lg-offset-2">
+                <label for="">会员说明</label>
+                <textarea ng-disabled="onOff?false:true" style="resize: vertical" ng-maxlength="255" rows="6" cols="50" class="form-control" ng-model="member.instruction" name="instruction" ng-required="true">
+                </textarea>
+                <p class="redBorder" ng-if="updateForm.instruction.$error.required && updateForm.instruction.$touched">输入不能为空</p>
+                <p class="redBorder" ng-if="updateForm.instruction.$error.maxlength && updateForm.instruction.$touched">输入不能为超过255字节</p>
+            </div>
+        </fieldset>
+        <fieldset>
+            <div class="input-group col-lg-offset-2">
+                <p>会期：12个月</p>
+                <p>
+                    <span>赠送会期前: </span>
+                    <input type="number" ng-disabled="onOff?false:true" min="0" max="12" ng-model="member.givingNumFront" name="member.givingNumFront" ng-required="true">
+                </p>
+               <p>
+                   <span>赠送会期后: </span>
+                   <input type="number" ng-disabled="onOff?false:true" min="0" max="12" ng-model="member.givingNumAfter" name="member.givingNumAfter" ng-required="true">
+               </p>
+                <p>
+                    <span>原 &nbsp;&nbsp; 价: </span>
+                    <input class="" type="text" ng-disabled="onOff?false:true"  ng-model="member.originalPrices" name="member.originalPrices" ng-required="true">
+                </p>
+                <p>
+                    <span style="margin-right: 3px;">活动价:</span>
+                    <input type="text" ng-disabled="onOff?false:true" ng-model="member.presentPrice" name="member.presentPrice" ng-required="true">
+                </p>
+            </div>
+        </fieldset>
+        <div style="margin-left:200px;margin-bottom:50px;" ng-click="isEdit()"  class="btn btn-warning">编辑</div>
+        <button style="margin-left:10px;margin-bottom:50px;" class="btn btn-primary">提交</button>
+    </form>
+
+</div>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">		
+		<link rel="stylesheet" href="preview-style.css">
+		<script type="text/javascript" charset="utf-8" src="../../js/ueditor/third-party/jquery-1.10.2.min.js"> </script>
+		<script type="text/javascript" charset="utf-8" src="../../js/ueditor/ueditor.parse.js"> </script>
+	</head>
+	<body>				
+		<div class="article-title">
+			<p class="title">
+				<!--{{title}}-->
+			</p>
+		</div>		
+		<div class="article-top">
+			<span class="article-time">
+				<!--我是预览作者-->
+			</span>
+			<span class="article-yue ">
+				<!--2012.12.12 12:12-->
+			</span>
+		</div>
+		<div class="clear">
+			<p class="zhaiyao">
+				<!--这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要这是摘要-->
+			</p>
+		</div>
+		<div class="clear article-content" id="con"></div>
+		<div class="laiyuan">
+			<p>
+				<!--文章来源:{{articleData.fromSource}}{{articleData.fromSource}}{{articleData.fromSource}}-->
+			</p>
+		</div>
+		<script>
+			function sh(){
+				uParse("#con",{
+					rootPath: 'app/js/ueditor/'
+				})
+			}
+
+//			var winWidth=0;
+//			var winHeight=0;
+//			function findDimensions() { //函数：获取尺寸
+//
+//				//获取窗口宽度
+//
+//				if (window.innerWidth) {
+//
+//					winWidth = window.innerWidth;
+//
+//				}
+//
+//				else if ((document.body) && (document.body.clientWidth)) {
+//
+//					winWidth = document.body.clientWidth;
+//
+//				}
+//
+//				//获取窗口高度
+//
+//				if (window.innerHeight) {
+//
+//					winHeight = window.innerHeight;
+//
+//				}
+//
+//				else if ((document.body) && (document.body.clientHeight)) {
+//
+//					winHeight = document.body.clientHeight;
+//
+//				}
+//
+//				//通过深入Document内部对body进行检测，获取窗口大小
+//
+//				if (document.documentElement && document.documentElement.clientHeight && document.documentElement.clientWidth) {
+//
+//					winHeight=document.documentElement.clientHeight;
+//
+//					winWidth=document.documentElement.clientWidth;
+//
+//				}
+//				//设置div的具体宽度=窗口的宽度的%
+//				if (document.getElementById("vjs_video_2_html5_api")) {
+//
+//					document.getElementById("vjs_video_2_html5_api").style.width= winWidth*0.98 + "px";
+//				}
+//			}
+//			window.onresize=findDimensions;
+
+
+		</script>
+</body>
+</html>

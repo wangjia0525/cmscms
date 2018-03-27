@@ -1,0 +1,35 @@
+<h3>内容管理
+    <small>文章评论详情</small>
+</h3>
+<div  ng-controller="discussDetailsCtrl" class="panel panel-default">
+    <div class="panel panel-default">
+        <form class="form-validate form-horizontal">
+            <!-- START panel-->
+            <div class="panel panel-default" style="border: none;">
+                <div class="panel-body">
+                    <div class="col-sm-12">
+                        <fieldset>
+                            <div class="form-group col-sm-8">
+                                <span>文章标题 : </span>
+                                <span>{{articleEvaluate.title}}</span>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group col-sm-10 no-padding-l-r">
+                                <span class="col-sm-2">评论内容 : </span>
+                                <textarea style="padding:10px" class="col-sm-8" rows="10" ng-readonly="true" style="resize: none">{{articleEvaluate.content}}
+                                </textarea>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="col-sm-6 text-center">
+                                <button class="btn btn-warning" ng-click="removeMasterList(articleEvaluate.articleEvaluateId)">删除</button>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <!-- END panel-->
+        </form>
+    </div>
+</div>

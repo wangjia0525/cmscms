@@ -1,0 +1,123 @@
+<!--
+	a mobileUser detail !
+-->
+<div ng-controller="topicDetailCtrl">
+    <h3>话题详情
+        <div class="form-group pull-right">
+            <a class="btn btn-danger  pull-right" style="margin-right:20px;" ng-if="topicListDetail.status==0" ng-click="removeTopic()">屏蔽话题</a>
+            <a class="btn btn-danger  pull-right" style="margin-right:20px;" ng-if="topicListDetail.status==1" ng-click="deleteTopic()">彻底删除话题</a>
+            <!--<div class="col-sm-1 pull-right"></div>-->
+            <a class="btn btn-primary  pull-right" style="margin-right:20px;" ng-if="!topicListDetail.isHot" ng-click="addRecommend()">推荐话题</a>
+            <!--<div class="col-sm-1 pull-right"></div>-->
+            <a class="btn btn-info  pull-right" style="margin-right:20px;"  ng-click="choiceFeatureDate()">精选问答</a>
+            <!--<div class="col-sm-1 pull-right"></div>-->
+            <a class="btn btn-success pull-right" style="margin-right:20px;" ng-if="!topicListDetail.isTop" ng-click="addHotToPic()">加入热门话题</a>
+            <a class="btn btn-success pull-right" style="margin-right:20px;" ng-if="topicListDetail.isTop" ng-click="removeHotToPic()">移除热门话题</a>
+            <!--<div class="col-sm-1 pull-right"></div>-->
+            <a class="btn btn-warning pull-right" style="margin-right:20px;" ng-click="onOff=true">修改话题</a>
+        </div>
+    </h3>
+    <div class="panel panel-default">
+        <form class="form-validate form-horizontal have-padding-l-r"  style="margin-top: 20px" name="updateForm" ng-submit="submitForm(updateForm.$valid)">
+            <div class="panel panel-primary no-padding-l-r">
+                <div class="panel-heading"><h4 class="text-center">话题详情</h4></div>
+                <div class="panel-body">
+                    <div class="input-group col-sm-6" style="margin-bottom: 20px">
+                        <span class="input-group-addon">标题 : </span>
+                        <input ng-disabled="onOff?false:true" type="text" class="form-control" placeholder="标题" name="title" ng-model="topicListDetail.title" required>
+                    </div>
+                    <p class="redBorder" ng-if="updateForm.title.$error.required && updateForm.title.$touched">输入不能为空</p>
+                    <div class="input-group col-sm-6" style="margin-bottom: 20px">
+                        <span class="input-group-addon">作者 : </span>
+<!--
+                        <input ng-disabled="onOff?false:true" type="text" class="form-control" placeholder="作者" name="name" ng-model="topicListDetail.userInfo.user.name" required>
+-->
+                        <input ng-disabled="onOff?false:true" type="text" class="form-control" autocomplete="off" placeholder="作者" name="name" ng-model="topicListDetail.userInfo.user.name" ng-change="userChange()" required ng-focus="userType = true" ng-blur="hideUl()">
+                        <ul ng-show="userType" class="user-ul-style">
+                            <li ng-repeat="userItem in userList" class="user-li-style" ng-click="changeName(userItem.user.name,userItem.user.userId)">
+                                <a class="cursor-p"><img err-src="./app/img/error-err.png" style="height:30px; border-radius: 50%; " ng-src="{{userItem.user.headURL}}"/></a>
+                                {{userItem.user.name}}
+                            </li>
+                            <li ng-show="userType && !userList.length">没有找到相关用户</li>
+                        </ul>
+                        <span class="input-group-addon" style="width:200px">发布方式 :
+                            <span style="display: inline-block"><input ng-disabled="onOff?false:true" class="pull-left" type="radio" class="form-control" placeholder="实名" name="type" value="1" ng-model="isAnonymous" required><span class="pull-left">实名</span></span>
+                            <span style="display: inline-block"><input ng-disabled="onOff?false:true" class="pull-left" type="radio" class="form-control" placeholder="匿名" name="type" value="2" ng-model="isAnonymous" required><span class="pull-left">匿名</span></span>
+                        </span>
+                    </div>
+                    <p class="redBorder" ng-if="(updateForm.name.$error.required && updateForm.name.$touched) || (updateForm.type.$error.required && updateForm.type.$touched)">输入不能为空</p>
+                    <div class="form-group col-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon">内容 : </span>
+                            <textarea ng-disabled="onOff?false:true" style="resize: none;" placeholder="内容" class="form-control" rows="8" name="content" ng-model="topicListDetail.content" required></textarea>
+                        </div>
+                    </div>
+                    <p class="redBorder" ng-if="updateForm.content.$error.required && updateForm.content.$touched">输入不能为空</p>
+                </div>
+            </div>
+            <!-- START panel-->
+            <div class="panel panel-default" style="border: none;">
+                <div class="panel-body">
+                </div>
+            </div>
+            <!-- END panel-->
+            <fieldset>
+                <div class="panel panel-danger col-sm-5 pull-left no-padding-l-r">
+                    <div class="panel-heading"><h4 class="text-center">话题的领域</h4></div>
+                    <div class="panel-body">
+                        <label class="my-checkbox" ng-repeat="userItem in realmList" ng-click="onOff?userItem.fnChecked = !userItem.fnChecked:''" ng-class="userItem.fnChecked?'my-checkbox my-checkbox_active_l':'my-checkbox'">
+                            <span>{{userItem.name}}</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-3 pull-right col-sm-offset-3">
+                    <div class="input-group">
+                        <span class="input-group-addon big-font bg-primary">影响力</span>
+                        <input ng-blur="effect()" ng-disabled="true" type="text" class="form-control input-h big-font" placeholder="数值" ng-model="topicListDetail.userInfo.score">
+                    </div>
+                </div>
+                <div class="col-sm-3 pull-right col-sm-offset-3">
+                    <div class="input-group">
+                        <span class="input-group-addon big-font bg-primary">关注数</span>
+                        <input ng-blur="effect()" ng-disabled="true" type="text" class="form-control input-h big-font" placeholder="数值" ng-model="topicListDetail.favoriteCount">
+                    </div>
+                </div>
+                <div class="col-sm-3 pull-right col-sm-offset-3">
+                    <div class="input-group">
+                        <span class="input-group-addon big-font bg-primary">回复数</span>
+                        <input ng-blur="effect()" ng-disabled="true" type="text" class="form-control input-h big-font" placeholder="数值" ng-model="topicListDetail.evaluateCount">
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <button ng-show="onOff"  class="btn btn-primary btn-lg center-block big-font">提交</button>
+            </fieldset>
+        </form>
+        <fieldset ng-show="topicListDetail.imageUrlList || topicListDetail.imageUrlList.length!=0" style="margin-left: 20px">
+            <span>话题图片:</span>
+            <fieldset>
+                <div class="topic-div" ng-repeat="item in topicListDetail.imageUrlList track by $index">
+                    <img class="topic-img" ng-src="{{item}}" alt="...">
+                </div>
+            </fieldset>
+        </fieldset>
+        <form class="form-validate form-horizontal have-padding-l-r"  style="margin-top: 20px" name="insertForm" ng-submit="submitForms(insertForm.$valid)">
+            <fieldset ng-show="topicListDetail.isPay=='付费'"><!-- 调试用正式改成付费!-->
+                <span>咨询专家:{{topicListDetail.expertsReplyOut.name}}</span>
+                <fieldset>
+                    <div class="form-group col-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon">内容 : </span>
+                            <!-- 调试用正式改成未回复!-->  <textarea ng-disabled="topicListDetail.isReply=='未回复'?false:true"  style="resize: none;" placeholder="内容" class="form-control" rows="8" ng-model="topicListDetail.expertsReplyOut.content" name="ReplyContent" required></textarea>
+                        </div>
+                        <p class="redBorder" ng-if="insertForm.ReplyContent.$error.required && insertForm.ReplyContent.$touched">输入不能为空</p>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <button   ng-show="topicListDetail.isReply=='未回复'?true:false " class="btn btn-primary btn-lg center-block big-font">确认发布</button>
+                </fieldset>
+            </fieldset>
+        </form>
+    </div>
+
+</div>

@@ -1,0 +1,155 @@
+<!--
+	a mobileUser detail !
+-->
+<div ng-controller="userDetailCtrl">
+    <h3>用户详情
+        <small>用户的详细信息</small>
+        <div class="form-group col-sm-6 pull-right">
+            <a class="btn btn-danger  pull-right" ng-click="addBlackList()" ng-if="mobileUserDetail.user.status==0">加入黑名单</a>
+            <a class="btn btn-danger  pull-right" ng-click="removeBlackList()" ng-if="mobileUserDetail.user.status==1">移除黑名单</a>
+            <div class="col-sm-1 pull-right"></div>
+            <a class="btn btn-success pull-right" ng-click="addMasterList()" ng-if="!mobileUserDetail.isMarketingUser">设为营销达人</a>
+            <a class="btn btn-success pull-right" ng-click="removeMasterList()" ng-if="mobileUserDetail.isMarketingUser">移除营销达人</a>
+            <div class="col-sm-1 pull-right"></div>
+            <a class="btn btn-warning pull-right" ng-click="onOff=true">修改用户信息</a>
+        </div>
+    </h3>
+    <div class="panel panel-default">
+        <form class="form-validate form-horizontal" name="updateForm" ng-submit="submitForm(updateForm.$valid)">
+            <!-- START panel-->
+            <div class="panel panel-default" style="border: none;">
+                <div class="panel-body">
+                    <div class="col-sm-1">
+                        <fieldset>
+                            <div class="form-group col-sm-12">
+                                <img style="width: 80px;height: 80px;" err-src="./app/img/error-err.png" id="mobileUserImgUrl" ng-src="{{mobileUserDetail.user.headURL}}" />
+                                <a class="btn btn-primary" id="pickfiles" style="margin-top: 10px;margin-left: 10px">上传</a>
+                            </div>
+                            <div class="form-group col-sm-3 pull-right">
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-sm-8">
+                        <fieldset>
+                            <div class="form-group col-sm-4">
+                                <div class="input-group col-sm-10">
+                                    <span class="input-group-addon">姓名 : </span>
+                                    <input ng-disabled="onOff?false:true" type="text" class="form-control" placeholder="姓名" name="name" ng-model="mobileUserDetail.realName" required>
+                                </div>
+                                <p class="redBorder" ng-if="updateForm.name.$error.required && updateForm.name.$touched">输入不能为空</p>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <div class="input-group col-sm-10">
+                                    <span class="input-group-addon">幸会号 : </span>
+                                    <input ng-disabled="onOff?false:true" type="text" class="form-control" placeholder="幸会号" ng-model="mobileUserDetail.imeetId">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group col-sm-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">性别 : </span>
+                                    <span style="margin-top: 8px;display: inline-block; margin-left: 20px;"><input ng-disabled="onOff?false:true" class="pull-left"  type="radio" class="form-control" placeholder="男" name="sex" value="1" ng-model="sex" required><span class="pull-left">男</span></span>
+                                    <span style="margin-top: 8px;display: inline-block; margin-left: 20px;"><input ng-disabled="onOff?false:true" class="pull-left"  type="radio" class="form-control" placeholder="女" name="sex" value="2" ng-model="sex" required><span class="pull-left">女</span></span>
+                                </div>
+                                <p class="redBorder" ng-if="updateForm.sex.$error.required && updateForm.sex.$touched">输入不能为空</p>
+                            </div>
+                            <div class="form-group col-sm-8">
+                                <div class="input-group col-sm-10">
+                                    <span class="input-group-addon">手机号 : </span>
+                                    <input ng-disabled="onOff?false:true" type="text" class="form-control" placeholder="手机号" name="phoneNo" ng-model="mobileUserDetail.user.phoneNo" required>
+                                </div>
+                                <p class="redBorder" ng-if="updateForm.phoneNo.$error.required && updateForm.phoneNo.$touched">输入不能为空</p>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group have-small-padding-l-r">
+                                <label class="pull-left" style="margin-right: 50px" for="">{{industrySelectName}} : </label>
+                                <select ng-disabled="onOff?false:true" style="width: 200px;margin-right: 10px" class="custom-css form-control col-sm-6" ng-model="industrySelectValue" ng-change="dataChange_2()" name="industrySelectValue" ng-options="industrySelectValue.name for industrySelectValue in industyList" required></select>
+                                <select ng-disabled="onOff?false:true" style="width: 200px" class="custom-css form-control col-sm-6" ng-model="industrySelectValue_2" ng-change="dataChange()" name="industrySelectValue_2" ng-options="industrySelectValue_2.name for industrySelectValue_2 in industrySelectValue.children" required></select>
+                                <p class="redBorder" ng-if="(updateForm.industrySelectValue.$error.required && updateForm.industrySelectValue.$touched) || (updateForm.industrySelectValue_2.$error.required && updateForm.industrySelectValue_2.$touched)">输入不能为空</p>
+                            </div>
+                        </fieldset>
+                        <!--<fieldset>
+                            <div class="form-group have-small-padding-l-r">
+                                <label class="pull-left" style="margin-right: 50px" for="">{{positionSelectName}} : </label>
+                                <select ng-disabled="onOff?false:true" style="width: 200px;margin-right: 10px" class="custom-css form-control col-sm-6" ng-model="positionSelectValue" ng-change="dataChange_3()" name="positionSelectValue" ng-options="positionSelectValue.name for positionSelectValue in jobPositionList" required></select>
+                                <select ng-disabled="onOff?false:true" style="width: 200px" class="custom-css form-control col-sm-6" ng-model="positionSelectValue_2" ng-change="dataChange()" name="positionSelectValue_2" ng-options="positionSelectValue_2.name for positionSelectValue_2 in positionSelectValue.children" required></select>
+                                <p class="redBorder" ng-if="updateForm.password_1.$error.required && updateForm.password_1.$touched">输入不能为空</p>
+                            </div>
+                        </fieldset>-->
+                        <fieldset>
+                            <div class="form-group have-small-padding-l-r">
+                                <label class="pull-left" style="margin-right: 22px" for="">{{regionSelectName}} : </label>
+                                <select ng-disabled="onOff?false:true" style="width: 200px;margin-right: 10px" class="custom-css form-control col-sm-6" ng-model="regionSelectValue" ng-change="dataChange_1()" name="regionSelectValue" ng-options="regionSelectValue.name for regionSelectValue in regionTypes" required></select>
+                                <select ng-disabled="onOff?false:true" style="width: 200px;" class="custom-css form-control col-sm-6" ng-model="regionSelectValue_2" ng-change="dataChange()" name="regionSelectValue_2" ng-options="regionSelectValue_2.name for regionSelectValue_2 in regionSelectValue.cityList" required></select>
+                                <p class="redBorder" ng-if="(updateForm.regionSelectValue.$error.required && updateForm.regionSelectValue.$touched) || (updateForm.regionSelectValue_2.$error.required && updateForm.regionSelectValue_2.$touched)">输入不能为空</p>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group col-sm-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon">职业名称 : </span>
+                                    <input ng-disabled="onOff?false:true" type="text" class="form-control" placeholder="职业名称" name="positionName" ng-model="mobileUserDetail.positionName" required>
+                                </div>
+                                <p class="redBorder" ng-if="updateForm.positionName.$error.required && updateForm.positionName.$touched">输入不能为空</p>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group col-sm-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon">公司名称 : </span>
+                                    <input ng-disabled="onOff?false:true" type="text" class="form-control" placeholder="公司名称" name="companyName" ng-model="mobileUserDetail.companyName" required>
+                                </div>
+                                <p class="redBorder" ng-if="updateForm.companyName.$error.required && updateForm.companyName.$touched">输入不能为空</p>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group col-sm-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon">个人简介 : </span>
+                                    <textarea ng-disabled="onOff?false:true" style="resize: none;" placeholder="个人简介" class="form-control" rows="3" ng-model="mobileUserDetail.introduce"></textarea>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <span class="input-group-addon big-big-font bg-primary">影响力</span>
+                            <input ng-blur="effect()" ng-disabled="onOff?false:true" type="number" class="form-control input-h big-font" placeholder="数值" name="score" ng-model="mobileUserDetail.score" required>
+                        </div>
+                        <p class="redBorder" ng-if="updateForm.score.$error.required && updateForm.score.$touched">输入不能为空</p>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="input-group" ui-sref="cms.coursesList({ userId : mobileUserDetail.user.userId})">
+                            <span class="input-group-addon big-big-font bg-primary">课程数</span>
+                            <input ng-blur="effect()" ng-disabled="true" type="number" class="form-control input-h big-font" placeholder="数值" ng-model="mobileUserDetail.courseCount" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END panel-->
+            <fieldset class="have-padding-l-r">
+                <div class="panel panel-danger col-sm-5 pull-left no-padding-l-r">
+                    <div class="panel-heading"><h4 class="text-center">关注的领域</h4></div>
+                    <div class="panel-body">
+                        <label class="my-checkbox" ng-repeat="userItem in realmList" ng-click="onOff?userItem.fnChecked = !userItem.fnChecked:''" ng-class="userItem.fnChecked?'my-checkbox my-checkbox_active_l':'my-checkbox'">
+                            <span>{{userItem.name}}</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="panel panel-success col-sm-5 pull-right no-padding-l-r">
+                    <div class="panel-heading"><h4 class="text-center">擅长的领域</h4></div>
+                    <div class="panel-body">
+                        <label class="my-checkbox" ng-repeat="userItem in realmList_2" ng-click="onOff?userItem.fnChecked = !userItem.fnChecked:''" ng-class="userItem.fnChecked?'my-checkbox my-checkbox_active_r':'my-checkbox'">
+                            <span>{{userItem.name}}</span>
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <button ng-show="onOff" class="btn btn-primary btn-lg center-block big-font">提交</button>
+            </fieldset>
+        </form>
+    </div>
+</div>

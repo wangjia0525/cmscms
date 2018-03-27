@@ -1,0 +1,166 @@
+{
+	"err": {
+		"code": 0,
+		"msg": "正常",
+		"eventId": ""
+	},
+	"interfaceList": [
+		{
+			"interfaceId": 1,
+			"introduce": "视频列表",
+			"url": "/cms/getvideolist",
+			"type": 4,
+			"sectionType":1
+		}, {
+			"interfaceId": 2,
+			"introduce": "添加视频接口",
+			"url": "/cms/addvideo",
+			"type": 1,
+			"sectionType":1
+		}, {
+			"interfaceId": 3,
+			"introduce": "修改视频接口",
+			"url": "/cms/modivideo",
+			"type": 3,
+			"sectionType":1
+		}, {
+			"interfaceId": 4,
+			"introduce": "视频栏目查询",
+			"url": "/cms/getcategorylist",
+			"type": 4,
+			"sectionType":1
+		}, {
+			"interfaceId": 5,
+			"introduce": "添加视频栏目",
+			"url": "/cms/addcategory",
+			"type": 1,
+			"sectionType":1
+		}, {
+			"interfaceId": 6,
+			"introduce": "修改视频栏目",
+			"url": "/cms/modicategory",
+			"type": 3,
+			"sectionType":1
+		}, {
+			"interfaceId": 7,
+			"introduce": "调整视频栏目顺序",
+			"url": "/cms/movecategory",
+			"type": 3,
+			"sectionType":2
+		}, {
+			"interfaceId": 8,
+			"introduce": "首页栏目列表",
+			"url": "/cms/getindexcategorylist",
+			"type": 4,
+			"sectionType":2
+		}, {
+			"interfaceId": 9,
+			"introduce": "添加一个首页栏目",
+			"url": "/cms/addindexcategory",
+			"type": 1,
+			"sectionType":2
+		}, {
+			"interfaceId": 10,
+			"introduce": "删除一个首页栏目",
+			"url": "/cms/deleteindexcategory",
+			"type": 2,
+			"sectionType":2
+		}, {
+			"interfaceId": 11,
+			"introduce": "移动首页栏目顺序",
+			"url": "/cms/moveindexcategory",
+			"type": 3,
+			"sectionType":2
+		}, {
+			"interfaceId": 12,
+			"introduce": "APP用户查询",
+			"url": "/cms/userList",
+			"type": 4,
+			"sectionType":2
+		}, {
+			"interfaceId": 13,
+			"introduce": "APP用户视频列表",
+			"url": "/cms/getuservideolist",
+			"type": 4,
+			"sectionType":2
+		}, {
+			"interfaceId": 14,
+			"introduce": "参数列表",
+			"url": "/cms/paramsList",
+			"type": 4,
+			"sectionType":2
+		}, {
+			"interfaceId": 15,
+			"introduce": "修改参数",
+			"url": "/cms/updateParaValue",
+			"type": 3,
+			"sectionType":2
+		}, {
+			"interfaceId": 16,
+			"introduce": "获取轮播图列表",
+			"url": "/cms/getvideoadlist",
+			"type": 4,
+			"sectionType":2
+		}, {
+			"interfaceId": 17,
+			"introduce": "增加一个轮播图",
+			"url": "/cms/addvideoad",
+			"type": 1,
+			"sectionType":2
+		}, {
+			"interfaceId": 18,
+			"introduce": "删除一个轮播图",
+			"url": "/cms/deletevideoad",
+			"type": 2,
+			"sectionType":2
+		}, {
+			"interfaceId": 19,
+			"introduce": "调整轮播图的顺序",
+			"url": "/cms/movevideoad",
+			"type": 3,
+			"sectionType":2
+		}, {
+			"interfaceId": 20,
+			"introduce": "获取栏目列表",
+			"url": "/cms/getcolumnlist",
+			"type": 4,
+			"sectionType":2
+		}, {
+			"interfaceId": 21,
+			"introduce": "删除一个视频",
+			"url": "/cms/deletevideo",
+			"type": 2,
+			"sectionType":3
+		}, {
+			"interfaceId": 22,
+			"introduce": "获取视频的详情",
+			"url": "/cms/getvideoinfo",
+			"type": 4,
+			"sectionType":3
+		}, {
+			"interfaceId": 23,
+			"introduce": "获取该视频的评论列表",
+			"url": "/cms/getevaluatelist",
+			"type": 4,
+			"sectionType":3
+		}, {
+			"interfaceId": 24,
+			"introduce": "获取该角色下的栏目列表",
+			"url": "/cms/selectrolecolumn",
+			"type": 4,
+			"sectionType":3
+		}, {
+			"interfaceId": 25,
+			"introduce": "获取意见列表",
+			"url": "/cms/adviceList",
+			"type": 4,
+			"sectionType":3
+		}, {
+			"interfaceId": 26,
+			"introduce": "处理意见",
+			"url": "/cms/doAdvice",
+			"type": 3,
+			"sectionType":3
+		}
+	]
+}

@@ -1,0 +1,34 @@
+<h3>
+    <small>日课老师</small>
+</h3>
+<div  ng-controller="incomeSituationCtrl" class="panel panel-default">
+    <div class="panel-heading">
+        <div class="form-inline">
+            <h4>{{name}}</h4>
+        </div>
+    </div>
+    <div class="panel-body " ng-class="loading?'whirl standard':'' " style="border-top: 1px solid #CFDBE2;">
+        <h4 style="background-color: #D3DEE4;padding: 5px">总收入</h4>
+        <h5>
+            <i style="margin-right:50px;">总收入金额 :{{total.allAmount|number:2}}元</i>
+            <i style="margin-right:50px;">总结算金额 :{{total.lumpSum|number:2}}元</i>
+            <i>未结算金额 :{{total.noSettlement|number:2}}元</i>
+        </h5>
+        <h4 style="background-color: #D3DEE4;padding: 5px">年费收入</h4>
+        <h5>
+            <i style="margin-right:50px;">总收入金额 :{{member.allAmount|number:2}}元</i>
+            <i style="margin-right:50px;">总结算金额 :{{member.lumpSum|number:2}}元</i>
+            <i style="margin-right:50px;" >未结算金额 :{{member.noSettlement|number:2}}元</i>
+            <i style="margin-right:50px;">总点击数 :{{member.allNum  }}次</i>
+            <i>未结算点击 :{{member.noNum}}次</i>
+        </h5>
+        <h4 style="background-color: #D3DEE4;padding: 5px">单买收入</h4>
+        <h5>
+            <i style="margin-right:50px;">总收入金额 :{{single.allAmount|number:2}}元</i>
+            <i style="margin-right:50px;">总结算金额 :{{single.lumpSum|number:2}}元</i>
+            <i style="margin-right:50px;">未结算金额 :{{single.noSettlement|number:2}}元</i>
+            <i style="margin-right:50px;">总购买数 :{{single.allNum }}次</i>
+            <i>未结算购买数量 :{{single.noNum}}次</i>
+        </h5>
+    </div>
+</div>

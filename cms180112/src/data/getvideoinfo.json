@@ -1,0 +1,50 @@
+{
+	"err": {
+		"code": 0,
+		"msg": "正常",
+		"eventId": ""
+	},
+	"video": {
+		"videoId": 1,
+		"title": "视频1的标题",
+		"summary": "视频1的摘要",
+		"picUrl": "",
+		"adpic":"",
+		"size": "98000",
+		"playCount": 5,
+		"todayPlayCount": 3,
+		"likeCount": 19,
+		"user": {
+			"name": "用户的名啊",
+			"userId": 2,
+			"headURL": "",
+			"sex": 1
+		},
+		"introduce": "视频的介绍啊",
+		"evaluateCount": 12,
+		"isPublic": true,
+		"categoryId": 3,
+		"videoDetailList": [
+			{
+				"videoId": 1,
+				"url": "",
+				"size": "3333",
+				"type": 1
+			}, {
+				"videoId": 1,
+				"url": "",
+				"size": "8888",
+				"type": 2
+			}, {
+				"videoId": 1,
+				"url": "",
+				"size": "9999",
+				"type": 3
+			}
+		],
+		"videoTime": "2016-03-29 16:39:00",
+		"createTime": "2016-03-29 16:39:00",
+		"updateTime": "2016-03-29 16:39:00"
+	},
+	"totalCount": 61
+}

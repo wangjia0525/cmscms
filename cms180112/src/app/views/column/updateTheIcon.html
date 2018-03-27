@@ -1,0 +1,15 @@
+<div class="panel">
+	<div class="panel-heading">
+		<h4 class="modal-title" ng-bind-html="updateTheIcon"></h4>
+	</div>
+	<div class="panel-body">
+		<section ng-repeat="fontItem in fontList">
+			<h2 class="page-header">{{fontItem.iconListName}}</h2>
+			<div class="row fontawesome-icon-list">
+				<div ng-click="selectTheIcon('fa fa-'+iconItem.icon)" ng-repeat="iconItem in fontItem.iconList" class="fa-hover col-md-3 col-sm-4">
+					<i style="width: 20px;" class="fa fa-{{iconItem.icon}} text-center"></i> {{iconItem.icon}}
+				</div>
+			</div>
+		</section>
+	</div>
+</div>

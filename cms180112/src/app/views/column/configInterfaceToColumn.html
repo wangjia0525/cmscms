@@ -1,0 +1,27 @@
+<div class="panel">
+	<div class="panel-heading">
+		<h4 class="modal-title" ng-bind-html="configInterfaceToColumnTitle"></h4>
+	</div>
+	<div class="panel-body" >
+		<div class="col-sm-8 searchInput">
+			<div class="input-group input-group-sm">
+				<input type="text" class="form-control" ng-change="dataChange(searchKey)" ng-model="searchKey" placeholder="{{searchplaceholder}}">
+				<span class="input-group-btn">
+					<button ng-click="dataChange(searchKey)" class="btn btn-default " type="button">GO</button>
+				</span>
+			</div>
+		</div>
+		<ul class="col-sm-12" style="height: 300px;padding: 0; overflow-y: auto;">
+			<li  ng-repeat="interfaceItem in interfaceListed">
+				<label class="checkbox-inline c-checkbox">
+                     <input id="inlineCheckbox10" type="checkbox"  ng-model="interfaceItem.selectStatus" ng-change="selectChange(interfaceItem.selectStatus,interfaceItem)" />
+                     <span class="fa fa-check"></span> 
+                     {{interfaceItem.url}}-{{interfaceItem.introduce}}</label>
+			</li>
+		</ul>
+	</div>
+	<div class="panel-footer text-right bg-white">
+		<button type="button" class="btn btn-default" ng-click="closeThisDialog()">取消</button>
+		<button type="button" class="btn btn-primary" ng-click="closeThisDialog()">确认</button>
+	</div>
+</div>
