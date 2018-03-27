@@ -1,0 +1,23 @@
+{
+  "dashboard": {
+    "WELCOME": "欢迎来到 {{appName}}"
+  },
+  "topbar": {
+    "search": {
+      "PLACEHOLDER": "请输入.."
+    }
+  },
+  "sidebar": {
+    "WELCOME": "欢迎",
+    "heading": {
+      "HEADER": "Main Navigation"
+    },
+    "nav": {
+      "SINGLEVIEW": "Single View",
+      "menu": {
+        "MENU": "Menu",
+        "SUBMENU": "Sub Menu"
+      }
+    }
+  }
+}

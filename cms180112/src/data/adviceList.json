@@ -1,0 +1,129 @@
+{
+	"err": {
+		"code": 0,
+		"msg": "正常",
+		"eventId": ""
+	},
+	"adviceList": [
+		{
+			"user": {
+				"userId": 6,
+				"name": "哈哈",
+				"phoneNo": "545777678@qq.com",
+				"registTime": "2016-04-19 17:14:27"
+			},
+			"adviceId": 12,
+			"status": 1,
+			"createTime": "2016-04-21 20:16:34",
+			"advice": "",
+			"contact": ""
+		}, {
+			"user": {
+				"userId": 7,
+				"name": "123",
+				"phoneNo": "6666@qq.com",
+				"registTime": "2016-04-20 10:08:17"
+			},
+			"adviceId": 13,
+			"status": 1,
+			"createTime": "2016-04-22 10:24:07",
+			"advice": "",
+			"contact": "I don't think that I can see you ！"
+		}, {
+			"user": {
+				"userId": 17,
+				"name": "`閆强强",
+				"registTime": "2016-04-22 10:41:41"
+			},
+			"adviceId": 14,
+			"status": 1,
+			"createTime": "2016-04-22 11:05:10",
+			"advice": "",
+			"contact": "，"
+		}, {
+			"user": {
+				"userId": 17,
+				"name": "`閆强强",
+				"registTime": "2016-04-22 10:41:41"
+			},
+			"adviceId": 15,
+			"status": 1,
+			"createTime": "2016-04-22 11:05:26",
+			"advice": "",
+			"contact": "cl"
+		}, {
+			"user": {
+				"userId": 6,
+				"name": "哈哈",
+				"phoneNo": "545777678@qq.com",
+				"registTime": "2016-04-19 17:14:27"
+			},
+			"adviceId": 16,
+			"status": 1,
+			"createTime": "2016-04-22 11:22:01",
+			"advice": "",
+			"contact": ""
+		}, {
+			"user": {
+				"userId": 7,
+				"name": "123",
+				"phoneNo": "6666@qq.com",
+				"registTime": "2016-04-20 10:08:17"
+			},
+			"adviceId": 17,
+			"status": 1,
+			"createTime": "2016-04-22 11:45:04",
+			"advice": "",
+			"contact": ""
+		}, {
+			"user": {
+				"userId": 6,
+				"name": "哈哈",
+				"phoneNo": "545777678@qq.com",
+				"registTime": "2016-04-19 17:14:27"
+			},
+			"adviceId": 18,
+			"status": 1,
+			"createTime": "2016-04-22 11:50:05",
+			"advice": "high",
+			"contact": ""
+		}, {
+			"user": {
+				"userId": 7,
+				"name": "123",
+				"phoneNo": "6666@qq.com",
+				"registTime": "2016-04-20 10:08:17"
+			},
+			"adviceId": 19,
+			"status": 1,
+			"createTime": "2016-04-22 12:43:04",
+			"advice": "23333333333",
+			"contact": ""
+		}, {
+			"user": {
+				"userId": 22,
+				"name": "tyy",
+				"phoneNo": "123456123@123.com",
+				"registTime": "2016-04-22 14:28:33"
+			},
+			"adviceId": 20,
+			"status": 1,
+			"createTime": "2016-04-22 14:36:34",
+			"advice": "Ghjjjjk",
+			"contact": ""
+		}, {
+			"user": {
+				"userId": 22,
+				"name": "tyy",
+				"phoneNo": "123456123@123.com",
+				"registTime": "2016-04-22 14:28:33"
+			},
+			"adviceId": 21,
+			"status": 1,
+			"createTime": "2016-04-22 14:37:40",
+			"advice": "Ghjjjjk",
+			"contact": ""
+		}
+	],
+	"totalCount": 21
+}

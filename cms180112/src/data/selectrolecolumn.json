@@ -1,0 +1,34 @@
+{
+	"err": {
+		"code": 0,
+		"msg": "正常",
+		"eventId": "xxxx-xxxx-xxxx"
+	},
+	"roleColumnList": [
+		{
+			"columnId": 1,
+			"createAuthority": true,
+			"deleteAuthority": true,
+			"roleId": 1,
+			"updateAuthority": true,
+			"selectAuthority": false,
+			"downloadAuthority": true
+		}, {
+			"columnId": 14,
+			"createAuthority": true,
+			"deleteAuthority": true,
+			"roleId": 1,
+			"updateAuthority": true,
+			"selectAuthority": false,
+			"downloadAuthority": true
+		}, {
+			"columnId": 18,
+			"createAuthority": true,
+			"deleteAuthority": true,
+			"roleId": 1,
+			"updateAuthority": true,
+			"selectAuthority": false,
+			"downloadAuthority": true
+		}
+	]
+}

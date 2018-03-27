@@ -1,0 +1,25 @@
+
+<!--
+	user list !
+-->
+<h3>{{rootColumnName}}
+    <small>{{rootColumnPrompt}}</small>
+</h3>
+<div  ng-controller="sensitiveCtrl" class="panel panel-default">
+    <div class="panel-heading">
+        <form class="form-inline">
+            <h5 style="color: #f05050">*增删改查敏感词时,需要每个字符串独占一行,不要出现空格<br>例如:<br>敏感词1<br>敏感词2<br>敏感词3</h5>
+            <button type="button" style="margin-top: -65px" ng-click="onOff=true" class="btn btn-labeled btn-success pull-right">
+               	<span class="btn-label">
+               		<i class="fa fa-plus"></i>
+               	</span>增删改查敏感词
+            </button>
+        </form>
+    </div>
+    <div class="panel-body " style="border-top: 1px solid #CFDBE2;">
+        <div class="input-group">
+            <textarea ng-readonly ="!onOff" class="form-control" style="resize: vertical;" rows="20" cols="200" ng-model="sensitiveList"></textarea>
+        </div>
+        <button style="margin-top: 20px" ng-if="onOff" class="btn btn-primary btn-lg center-block" ng-click="sensitiveTrue()">确认</button>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+{
+    "err":{
+        "code":0,
+        "msg":"正常",
+        "eventId":"xxxx-xxxx-xxxx"
+    },
+    "userList":[
+    	{
+    		"cmsUserId":1,
+    		"name":"超级超级管理员",
+    		"roles":[
+    			{
+	    			"roleId":2,
+					"name":	"角色名",
+					"type"	:2,
+					"introduce":"介绍！！！"
+				}
+    		]
+    	},
+    	{
+    		"cmsUserId":2,
+    		"name":"超级超级管理员",
+    		"roles":[
+    			{
+	    			"roleId":2,
+					"name":	"角色名",
+					"type"	:2,
+					"introduce":"介绍！！！"
+				}
+    		]
+    	},
+    	{
+    		"cmsUserId":3,
+    		"name":"超级超级管理员",
+    		"roles":[
+    			{
+	    			"roleId":2,
+					"name":	"角色名1",
+					"type"	:2,
+					"introduce":"介绍！！！"
+				}
+    		]
+    	}
+    ],
+    "totalCount":43
+}

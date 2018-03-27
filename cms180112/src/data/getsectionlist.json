@@ -1,0 +1,25 @@
+{
+    "err":{
+        "code":0,
+        "msg":"正常",
+        "eventId":"xxxx-xxxx-xxxx"
+    },
+    "sectionList":[
+    	{
+    		"sectionId":1,
+    		"name":"人事",
+    		"introduce":"介绍"
+    	},
+    	{
+    		"sectionId":2,
+    		"name":"技术",
+    		"introduce":"介绍"
+    	},
+    	{
+    		"sectionId":3,
+    		"name":"IT",
+    		"introduce":"介绍"
+    	}
+    ],
+    "totalCount":43
+}

@@ -1,0 +1,71 @@
+{
+  "err":{
+    "code":0,
+    "msg":"正常",
+    "eventId":"xxxx-xxxx-xxxx"
+  },
+  "appInfoList":[
+    {
+      "appInfoId": 1,
+      "version": 1.23,
+      "canUser": true,
+      "plat": "android"
+    },{
+      "appInfoId": 2,
+      "version": 1.13,
+      "canUser": false,
+      "plat": "android"
+    },{
+      "appInfoId": 3,
+      "version": 3.23,
+      "canUser": false,
+      "plat": "android"
+    },{
+      "appInfoId": 4,
+      "version": 1.43,
+      "canUser": true,
+      "plat": "android"
+    },{
+      "appInfoId": 5,
+      "version": 1.53,
+      "canUser": false,
+      "plat": "android"
+    },{
+      "appInfoId": 6,
+      "version": 1.63,
+      "canUser": false,
+      "plat": "android"
+    },{
+      "appInfoId": 7,
+      "version": 1.73,
+      "canUser": false,
+      "plat": "android"
+    },{
+      "appInfoId": 8,
+      "version": 1.83,
+      "canUser": true,
+      "plat": "android"
+    },{
+      "appInfoId": 9,
+      "version": 1.93,
+      "canUser": true,
+      "plat": "android"
+    },{
+      "appInfoId": 10,
+      "version": 1.203,
+      "canUser": true,
+      "plat": "android"
+    },{
+      "appInfoId": 11,
+      "version": 1.213,
+      "canUser": true,
+      "plat": "android"
+    },{
+      "appInfoId": 12,
+      "version": 1.223,
+      "canUser": true,
+      "plat": "android"
+    }
+  ],
+  "totalCount" : 12
+}
