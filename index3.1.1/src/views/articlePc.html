@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>i幸会官网--学实战营销,上i幸会</title>
+	<meta name="description" content="营销人专属学习平台，从问答到日课，从资讯到文章，汲取众家思想之长，让你身在市场仍能不断成长。" />
+    <meta name="keywords" content="i幸会官网,i幸会,i幸会app,市场营销,营销技巧,营销培训,数字营销,量子营销,营销课程,营销案例,营销方案,营销规划,营销书籍,营销方法,营销策划,营销策略,营销心得,营销视频,营销文章,营销音频,营销社群,营销模式,内容营销,营销文案" />
+    <script>
+        //sessionStorage.removeItem(userId_token);
+        var userId_token=sessionStorage['userId_token'];
+
+        if(userId_token){
+            var userId=userId_token.split(',')[0].split(':')[1];
+            var token=userId_token.split(',')[1].split(':')[1];
+            var signa=userId_token.split(',')[2].split(':')[1];
+//            console.log(userId_token,userId,token,signa);
+        }else{
+            window.location.href='../login.html';
+        }
+    </script>
+    <link rel="stylesheet" href="../css/articlePc.css">
+    <link rel="icon" href="../img/da.ico">
+    <script src="../js/jquery-1.12.2.min.js"></script>
+    <script src="../js/qrcode.js"></script>
+    <!-- 富文本-->
+    <script type="text/javascript" charset="utf-8" src="../ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../ueditor/ueditor.all.min.js"> </script>
+    <script type= "text/javascript" src= "../js/ajaxfileupload.js" ></script>
+    <script src="../js/index.js"></script>
+</head>
+<body>
+<div id="top">
+    <div>
+        <img class="logo" src="../img/logo.png" alt=""/>
+        <div>
+            <img class="headPic" src="" alt=""/>
+            <div>
+                退出
+            </div>
+        </div>
+        <a href="http://api.ixinghui.com/ixinghui-share/article/articleH5.html#articleId=301&h5=3" target="_blank">发布标准</a>
+    </div>
+</div>
+<section>
+   <div id="content_left">
+
+   </div>
+    <ul class="ul">
+        <li class="articlePublish show">
+            <i></i>
+            <span>发布文章</span>
+        </li>
+        <li class="articleMy">
+            <i></i>
+            <span>我的文章</span>
+        </li>
+    </ul>
+    <div id="content_right">
+        <div class="articlePublishContent showContent">
+            <div class="field">
+                <i class="line"></i>
+                <span class="span1">文章的标签</span>
+                <span class="span2">(选填)</span>
+                <ul>
+                    <!--<li><span>消费者研究</span></li>-->
+                    <!--<li><span>引爆营销</span></li>-->
+                    <!--<li><span>品牌突围</span></li>-->
+                    <!--<li><span>开启新零售</span></li>-->
+                    <!--<li><span>渠道开拓</span></li>-->
+                    <!--<li class="fnChecked"><span>销量破局</span></li>-->
+                </ul>
+            </div>
+            <div class="title">
+                <i class="line"></i>
+                <span class="span1">文章标题</span>
+                <span class="span2">Title</span>
+                <div class="titlePress">
+                    <input  type="text" maxlength="50" placeholder="请在这里输入标题(必填项)"/>
+                    <span><span>50</span>/50</span>
+                </div>
+            </div>
+            <div class="picture">
+                <i class="line"></i>
+                <span class="span1">文章配图</span>
+                <span class="span2">(选填)</span>
+                <div class="picSelect">
+                    <img src="../img/articlePc/peitu.png"  id='img' alt="配图"/>
+                    <input type='file' name="image" id='iptfileupload' onchange='getShow()' value='' title="配图" />
+                </div>
+            </div>
+            <div class="contentAbstracts">
+                <i class="line"></i>
+                <span class="span1">文章内容</span>
+                <span class="span2">Content</span>
+                <div class="abstracts">
+                    <span>文章摘要（选填）</span>
+                    <div class="abstractsPress">
+                        <input  type="text" maxlength="120" placeholder="摘要（选填）"/>
+                        <span><span>120</span>/120</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <script id="editor" type="text/plain" style="width:96%;height:300px;margin:0 2%"></script>
+            <div class="fabu">
+                <span>为保证文章质量，小编可能会优化排版或修改配图。</span>
+                <div id="btn">
+                    <button id="btn1">保存草稿</button>
+                    <button id="btn2">提交</button>
+                    <button id="btn3">预览</button>
+                </div>
+            </div>
+        </div>
+        <div class="articleMyContent">我的文章</div>
+    </div>
+</section>
+<footer id="footer">
+    <div>
+        Copyright &copy; 2017 i幸会 版权所有 All Rights Reserved 京ICP备 14008983号-4 &nbsp;客服电话:010-65882005 文章投稿：xiaobian@ixinghui.com
+    </div>
+</footer>
+<script>
+    if(sessionStorage.getItem('headImage')){
+        $('.headPic').attr('src',sessionStorage.getItem('headImage'));
+    }else{
+        $.ajax({
+            url :endpoint + "getUserForH5ForSin" + jsonpoint,
+            data : {
+                userId:userId,
+                token:token,
+                signa:signa
+            },
+            type:'post',
+            success : function(data){
+                sessionStorage.setItem('headImage',data.user.user.headURL);
+                $('.headPic').attr('src',data.user.user.headURL);
+            }
+        })
+    }
+
+</script>
+<script type="text/javascript" charset="utf-8" src="../js/articlePc.js"></script>
+</body>
+</html>

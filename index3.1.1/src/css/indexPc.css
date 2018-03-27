@@ -1,0 +1,306 @@
+ul,p,h1,h2,h3,h4,h5,h6,ol,dl,dd{
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+.lf{float:left;}
+.rt{float:right;}
+.clear{clear:both;}
+*{
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:'PingFang SC',serif;
+    background:#fff;
+    font-size:15px;
+    color:#333;
+    /*overflow: hidden;*/
+    /*-webkit-font-smoothing:antialiased;*/
+}
+a{
+    text-decoration:none;
+    color:#555;
+}
+/*顶部导航栏*/
+#top{
+    width:100%;
+    box-sizing:border-box;
+    height:60px;
+    position:fixed;
+    top:0;
+    background-color: #FFFFFF;
+    z-index: 1000 !important;
+}
+#top>div{
+    width:1080px;
+    height:60px;
+    margin:0 auto;
+}
+#top>div>img.logo{
+    width:100px;
+    height:60px;
+    margin-left: 70px;
+    float:left;
+}
+#top>div>img.weixin{
+    width:26px;
+    height:22px;
+    margin-right: 30px;
+    float:right;
+    margin-top: 19px;
+}
+#top>div>a{
+    width:64px;
+    height:20px;
+    line-height: 20px;
+    margin-top:16px;
+    padding:3px 0px;
+    text-align: center;
+    font-size: 12px;
+    margin-right: 60px;
+    border: 1px solid #cdcdcd;
+    border-radius: 13px;
+    display: inline-block;
+    color:#4e4e4e;
+    float:right;
+}
+#top>div>img.weixin:hover,#top>div>img.weibo:hover{
+    cursor: pointer;
+}
+#top>div>img.weibo{
+    width:27px;
+    height:22px;
+    margin-right: 30px;
+    float:right;
+    margin-top: 19px;
+}
+#top>div>img.weixinma{
+    position: absolute;
+    top:60px;
+    width:100px;
+    height:100px;
+    margin-left:260px;
+    left:50%;
+    /*display: none;*/
+    opacity: 0;
+}
+
+/*第一个页面*/
+.main1{
+    width:100%;
+    height:600px;
+    margin-top:60px;
+    text-align: center;
+    background-color: #000;
+}
+.main1>img{
+    width:1080px;
+    height:600px;
+}
+/*第二个页面*/
+.main2{
+    width:100%;
+    height:680px;
+    text-align: center;
+    background-color: #fcfcfc;
+}
+.main2>div{
+    width:1080px;
+    height:600px;
+    position: relative;
+    left:50%;
+    margin-left:-540px;
+}
+
+/*轮播*/
+#slider2{
+    width:224px;
+    height:400px;
+    left:142px;
+    top:143px;
+    position:absolute;
+    overflow:hidden;
+}
+#slider2>#imgs2{
+    position:absolute;
+    top:0;
+    left:0;
+    height:400px;
+}
+#slider2>#imgs2>li{
+    float:left;
+    z-index:0;
+    position:relative;
+}
+/*轮播小圆点*/
+/*#slider2>#indexs2{*/
+    /*position:absolute;*/
+    /*bottom:8px;*/
+    /*left:86.5px;*/
+/*}*/
+/*#slider2>#indexs2>li {*/
+    /*width: 7px;*/
+    /*height: 7px;*/
+    /*display: inline-block;*/
+    /*background: #ddd;*/
+    /*color: black;*/
+    /*text-align: center;*/
+    /*cursor: pointer;*/
+    /*margin-left:10px;*/
+    /*border-radius: 50%;*/
+/*}*/
+/*#slider2>#indexs2>li:hover,#slider2>#indexs2>li.hover {*/
+    /*background:#01BFC4;*/
+    /*transition:all .5s linear;*/
+/*}*/
+/*第三个页面*/
+.main3{
+    width:100%;
+    height:680px;
+    text-align: center;
+    position: relative;
+    background-color: #fff;
+}
+.main3>div{
+    width:1080px;
+    height:680px;
+    position: relative;
+    left:50%;
+    margin-left:-540px;
+}
+.main3>div>img.biaoti1{
+    margin-top:44px;
+}
+/*老师图像*/
+#panda-show{
+    position: absolute;
+    top:200px;
+    left:0;
+}
+#panda-show  .full {
+    width: 100%;
+    overflow: hidden;
+
+}
+#panda-show  .content {
+    width:1080px;
+    margin: 0 auto;
+    position: relative;
+}
+#panda-show  .swiper-container {
+    overflow: hidden;
+    width:920px;
+    height: 380px;
+    /*margin-left:80px;*/
+}
+
+#panda-show  .swiper-slide {
+    height: 380px;
+    position: relative;
+}
+
+#panda-show  .swiper-slide img {
+    width:280px;
+    height:380px;
+    -webkit-transition: all linear 300ms;
+    transition: all linear 300ms;
+    /*cursor: pointer;*/
+}
+#panda-show  .arrow-left {
+    background: url(../img/jiantou1.png) no-repeat;
+    position: absolute;
+    left:0;
+    top: 50%;
+    margin-top: -30px;
+    width: 35px;
+    height: 80px;
+    z-index: 15;
+    cursor: pointer;
+}
+
+#panda-show .arrow-right {
+    background: url(../img/jiantou2.png) no-repeat;
+    position: absolute;
+    right:0;
+    top: 50%;
+    margin-top: -30px;
+    width: 33px;
+    height: 60px;
+    z-index: 15;
+    cursor: pointer;
+}
+
+#panda-show .stars-info {
+    height: 146px;
+    position: absolute;
+    left:13.6px;
+    bottom: -146px;
+    text-align: center;
+    width: 280px;
+    background:url('../img/photoshadow.png');
+    -webkit-transition: all linear 250ms;
+    transition: all linear 250ms;
+    color: #fff;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+#panda-show a:hover .stars-info {
+    bottom: 0;
+}
+
+#panda-show .stars-info .name {
+    font-size: 20px;
+    font-weight: bold;
+    height: 26px;
+    line-height: 26px;
+    color:#fff;
+    margin-top:54px;
+}
+#panda-show .stars-info .intro {
+    color:#fff;
+    font-size: 14px;
+    height: 18px;
+    line-height: 18px;
+    margin-top:16px;
+}
+/*第四个页面*/
+.main4{
+    width:100%;
+    height:680px;
+    text-align: center;
+    background:url('../img/background.png');
+}
+.main1>img{
+    width:1080px;
+    height:600px;
+}
+/*第五个页面*/
+.main5{
+    width:100%;
+    height:740px;
+    text-align: center;
+    background-color:#000;
+}
+.main5>img{
+    width:1080px;
+    height:740px;
+}
+/*第六个页面*/
+.main6{
+    width:100%;
+    height:44px;
+   line-height:44px;
+    text-align: center;
+    background-color:#3C404B;
+}
+.main6>div{
+    color:#f0f0f0;
+    font-size: 12px;
+}
+
+
+
+

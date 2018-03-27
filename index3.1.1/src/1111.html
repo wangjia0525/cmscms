@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas帧--实现动画</title>
+    <style>
+        *{padding:0;margin:0;}
+        canvas{display:block;background:white}
+    </style>
+</head>
+<body>
+<canvas></canvas>
+<script>
+
+//    for (let i = 0; i < 5; i++) {
+//        setTimeout(function() {
+//            console.log(i);
+//        }, i*1000);
+//    }
+//
+//    var callback = function(arg3) {
+//        console.log('callback Totle is:' + arg3)
+//    }
+//
+//    function fn(arg1, arg2, cb) {
+//        var Total = arg1 + arg2;
+//        cb(Total);
+//        console.log('mainFunction Totle is:' + Total)
+//    }
+//
+//    fn(2, 2, callback)   // 调用fn()函数，并传入2, 2, callback作为参数
+//    function f2() {
+//
+//        console.log('f2 finished')
+//    }
+//
+//    function f1(cb) {
+//
+//        setTimeout(cb,1000)        //用setTimeout()模拟耗时操作
+//        console.log('f1 finished')
+//    }
+//
+//    f1(f2);
+    //阻塞：一个程序没运行完 它后面的程序就无法运行
+    //费阻塞：一个程序 因为各种原因像网络 代码量没运行完的时候，后面的程序可以正常运行
+//    var foo = function(){
+//        console.log('foo begins');
+//        setTimeout(function(){
+//            console.log('foo finishes');
+//        },1000);
+//    };
+//    var bar = function(){
+
+//        while(true){
+//
+//        }
+//    }
+//    foo();
+//    bar();
+//var foo = function(params,callback){
+//    // foo method
+//   return callback(5);
+//};
+//foo(5,function(data){
+//    console.log(data)
+//});
+    var b;
+    function number(a){
+        b=a;
+        for(var i= 0,arr=[];i<b;i++){
+            arr.push(Math.ceil(Math.random()*32));
+        }
+        return arr;
+    }
+    console.log(number(1));
+    console.log(number(2));
+    console.log(number(3));
+    console.log(number(4));
+</script>
+</body>
+</html>

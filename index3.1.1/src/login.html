@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>i幸会官网--学实战营销,上i幸会</title>
+	<meta name="description" content="营销人专属学习平台，从问答到日课，从资讯到文章，汲取众家思想之长，让你身在市场仍能不断成长。" />
+    <meta name="keywords" content="i幸会官网,i幸会,i幸会app,市场营销,营销技巧,营销培训,数字营销,量子营销,营销课程,营销案例,营销方案,营销规划,营销书籍,营销方法,营销策划,营销策略,营销心得,营销视频,营销文章,营销音频,营销社群,营销模式,内容营销,营销文案" />
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="icon" href="img/da.ico">
+    <script src="js/jquery-1.12.2.min.js"></script>
+    <script src="js/qrcode.js"></script>
+    <script type="text/javascript" src="js/md5.js"></script>
+    <script src="js/index.js"></script>
+</head>
+<body>
+    <div id="top">
+        <div>
+            <img class="logo" src="img/logo.png" alt=""/>
+            <img class="weibo" src="img/weibo.png" alt=""/>
+            <img class="weixin" src="img/wechat.png" alt=""/>
+            <img class="weixinma" src="img/erweima.png" alt=""/>
+        </div>
+    </div>
+    <div id="main">
+        <img src="img/login/tu.png" alt=""/>
+        <div class="login-box">
+                <ul>
+                    <li class="accountLogin">
+                        <a>账号登录</a>
+                        <i></i>
+                    </li>
+                    <li class="saoLogin" id="saoLogin">
+                        <a>扫码登录</a>
+                    </li>
+                </ul>
+                <div class="login-content">
+                    <div class="saoma show" id="saoma">
+                        <div id="qrcode"></div>
+                        <p>打开i幸会，扫一扫登录更方便</p>
+                        <span></span>
+                    </div>
+                    <form id="j_form3" class="j_form3" method="post" autocomplete="off">
+                        <ul>
+                            <li>
+                                <i class="phone_icon"></i>
+                                <a class="line1"></a>
+                                <input type="text" name="reg_username" class="inputHeight" placeholder="账号">
+                            </li>
+                            <li>
+                                <i class="password_icon1"></i>
+                                <a class="line2"></a>
+                                <input type="password" name="reg_password" class="inputHeight pass" placeholder="密码">
+                            </li>
+
+                        </ul>
+                        <div class="remember">
+                            <i class="select1"></i>
+                            <span class="span1">记住密码</span>
+                            <span class="span2"></span>
+                            <i class="wrong"></i>
+                        </div>
+                        <div class="parbot1">
+                            <input type="button" class="login_register" id="login" value="登录"/>
+                        </div>
+                    </form>
+                </div>
+                <div class="down">
+                    <i></i><a>网站暂不支持注册，下载app注册i幸会吧</a>
+                </div>
+        </div>
+    </div>
+
+    <div class="main6">
+        <div>
+            Copyright &copy; 2017 i幸会 版权所有 All Rights Reserved 京ICP备 14008983号-4 &nbsp;客服电话:010-65882005 文章投稿：xiaobian@ixinghui.com
+        </div>
+    </div>
+    <script>
+        //扫码登录
+		var code;
+        var flag=0;
+		 //二维码
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+            width : 190,
+            height : 190
+        });
+		makeCode();
+        function GetQueryString(name)
+        {
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if(r!=null)return  unescape(r[2]); return null;
+        }
+
+            var status;
+            function getResult(){
+                $.ajax({
+                    type: 'POST',
+                    url: "/ixinghui/pc/getLoginLongPolling" + jsonpoint,
+                    data: {
+                        code:code
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        console.log('成功啦');
+                        //对成功数据的操作TODO：
+                        console.log(data.message)
+                        if(data.message.length>0){
+                            clearInterval(status);
+                            sessionStorage.removeItem('headImage');
+                            sessionStorage.removeItem('userId_token');
+                            sessionStorage['userId_token']=data.message;
+                            window.location.href='views/articlePc.html';
+                        }
+                    },
+                    dataType: 'json',
+                    timeout: 30*1000,// 超时时间
+                    // 超时意味着出错了
+                    error: function (error) {
+                        console.log('失败啦');
+                    }
+
+                });
+            }
+
+        //获取code。如果code存在则调用轮询来获取数据
+
+        if(GetQueryString('state')==0){
+            $('.accountLogin>a').css({
+                'color':'#fff'
+            });
+            $('.saoLogin>a').css({
+                'color':'#059a9e'
+            });
+            $('.saoma').removeClass('show');
+            $('.j_form3').addClass('show');
+        }else{
+            //判断当前浏览器是否支持WebSocket
+            if(flag==0){
+                flag=1;
+                status = setInterval(getResult, 2000);
+                console.log('code： '+code)
+                $('.accountLogin>a').css({
+                    'color':'#059a9e'
+                });
+                $('.saoLogin>a').css({
+                    'color':'#fff'
+                });
+                $('.saoma').addClass('show');
+                $('.j_form3').removeClass('show');
+//                sessionStorage['userId_token']=event.data;
+
+            }
+
+        }
+        $('.logo').click(function(){
+            window.open('indexPc.html');
+        });
+        $(function(){
+            //验证规则
+            var regular = {
+                //password密码 bank银行卡 phone手机号码 email邮箱 idcard身份证
+                password : /^[a-z]+[a-zA-Z0-9_.-]{7,19}$/i,
+                bank : /^(\d{16}|\d{19})$/,
+                phone :  /^(13|14|15|18|17)[0-9]{9}$/,
+                email : /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$/,
+                idcard : /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/
+            }
+            var errorMsg = {
+                username : "用户名不能为空",
+                password : "密码不能为空",
+                code : "验证码不能为空",
+                code1 : "该手机号码已经注册, 请直接登录",
+                bank : "银行卡不能为空",
+                phone : "请输入手机号",
+                email : "邮箱地址不能为空",
+                idcard : "身份证号码不能为空"
+            }
+            var regularMsg = {
+                password : "密码格式有误，字母开头长度8-20位",
+                passwordtwice : "两次输入的密码不一致",
+                bank : "银行卡格式有误！",
+                phone : "手机号码格式有误",
+                email : "邮箱地址格式错误",
+                idcard : "身份证号码格式有误"
+            }
+            var tap= function(className, callback) {
+                return $("body").off("click", className).on("click", className, function(event) {
+                    event.preventDefault();
+                    var element = this,
+                            index = $(element).index();
+                    callback(index, element);
+                });
+            };
+            //设置cookie
+            function setCookie(name,value,day){
+                var date = new Date();
+                date.setDate(date.getDate() + day);
+                document.cookie = name + '=' + value + ';expires='+ date;
+            };
+            //获取cookie
+            function getCookie(name){
+                var reg = RegExp(name+'=([^;]+)');
+                var arr = document.cookie.match(reg);
+                if(arr){
+                    return arr[1];
+                }else{
+                    return '';
+                }
+            };
+            //删除cookie
+            function delCookie(name){
+                setCookie(name,null,-1);
+            };
+            var rem=$('.remember>i');
+            var username,password,pwd;
+            //页面初始化时，如果帐号密码cookie存在则填充
+            if(getCookie('ixinghui_username') && getCookie('ixinghui_pwd')){
+                $("[name='reg_username']").attr('value',getCookie('ixinghui_username'))
+                $("[name='reg_password']").attr('value',getCookie('ixinghui_pwd'))
+                rem.addClass('select').removeClass('select1')
+            }
+            //记住密码
+            $('.remember').click(function(){
+                if(rem[0].className=='select'){
+                    rem.addClass('select1').removeClass('select');
+                    delCookie('ixinghui_username');
+                    delCookie('ixinghui_pwd');
+                }else{
+                    console.log(1111)
+                    rem.addClass('select').removeClass('select1');
+
+                }
+            })
+            function loginlogin(){
+                username = $("[name='reg_username']").val();
+                password = $("[name='reg_password']").val();
+                pwd=hex_md5(password);
+                if( $.trim(username) == "" ){
+                    $('.span2').html('账号不能为空').show();
+                    $('.wrong').show();
+                    return false;
+                }
+                if( !regular.phone.test(username) ){
+                    $('.span2').html('账号格式有误').show();
+                    $('.wrong').show();
+                    return false;
+                }
+                if( $.trim(password) == "" ){
+                    $('.span2').html('密码不能为空').show();
+                    $('.wrong').show();
+                    return false;
+                }
+                $.ajax({
+                    url : endpoint + "LoginForPc" + jsonpoint,
+                    type : "POST",
+                    data : {
+                        "phoneNo":username ,
+                        "password":pwd
+                    },beforeSend: function(){
+                        $('.login_register').attr('value',"正在登录，请稍后...");
+                    }
+                }).done(function(data){
+                    console.log(data);
+                    if(data.err.code==0){
+                        console.log(data.message);
+                        if(rem[0].className=='select'){
+                            setCookie('ixinghui_username',username,7); //保存帐号到cookie，有效期7天
+                            setCookie('ixinghui_pwd',password,7); //保存密码到cookie，有效期7天
+                        }else{
+
+                        }
+                        sessionStorage.removeItem('headImage');
+                        sessionStorage.removeItem('userId_token');
+                        sessionStorage.setItem('userId_token',data.message);
+                        //                        function isWeiXin(){
+                        //                            var ua = window.navigator.userAgent.toLowerCase();
+                        //                            if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+                        //                                return true;
+                        //                            }else{
+                        //                                return false;
+                        //                            }
+                        //                        }
+                        //                        if(isWeiXin()){
+                        //                            window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx245428584189430f&redirect_uri=http://api.ixinghui.com/ixinghui-share/member/memberDescription.html&response_type=code&scope=snsapi_base#wechat_redirect';
+                        //                        }else{
+                        //                            window.location.href='memberDescription.html';
+                        //                        }
+                        window.location.href='views/articlePc.html';
+                    }else if(data.err.code==-12){
+                        console.log(11)
+                        $('.span2').html('账户或密码错误').show();
+                        $('.login_register').attr('value',"登录");
+                        $('.wrong').show();
+                    }else if(data.err.code==-106){
+                        $('.span2').html(data.err.msg).show();
+                        $('.wrong').show();
+
+                    }
+                }).fail(function(){
+
+                });
+            }
+            //账户登录
+            $(document).keydown(function (event) {
+                if($('.j_form3').hasClass('show')){
+                    if (event.keyCode == 13) {
+                        loginlogin()
+                    }
+                }
+
+            });
+            tap('#login',function(){
+                loginlogin()
+            })
+        })
+
+        //Javascript生成全局唯一标识符（GUID,UUID）
+        function uuid(len, radix) {
+            var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
+            var uuid = [], i;
+            radix = radix || chars.length;
+
+            if (len) {
+                // Compact form
+                for (i = 0; i < len; i++) uuid[i] = chars[0 | Math.random()*radix];
+            } else {
+                // rfc4122, version 4 form
+                var r;
+
+                // rfc4122 requires these characters
+                uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
+                uuid[14] = '4';
+
+                // Fill in random data. At i==19 set the high bits of clock sequence as
+                // per rfc4122, sec. 4.1.5
+                for (i = 0; i < 36; i++) {
+                    if (!uuid[i]) {
+                        r = 0 | Math.random()*16;
+                        uuid[i] = chars[(i == 19) ? (r & 0x3) | 0x8 : r];
+                    }
+                }
+            }
+
+            return uuid.join('');
+        }
+
+        function makeCode () {
+            var elText =$("#saoLogin");
+            code=uuid(16,10)
+//            console.log("scanLoginXHPC:"+code);
+            //生成二维码
+            qrcode.makeCode("scanLoginXHPC:"+code);
+        }
+        //账号登录
+        $('.accountLogin').click(function(){
+            $('.saoLogin>a').css({
+                'color':'#059a9e'
+            });
+            $('.accountLogin>a').css({
+                'color':'#fff'
+            })
+            $('.saoma').removeClass('show');
+            $('.j_form3').addClass('show');
+        });
+        //扫码登录
+        $('.saoLogin').click(function(){
+            //判断当前浏览器是否支持WebSocket
+            if(flag==0){
+                flag=1;
+                status = setInterval(getResult, 2000);
+                $('.accountLogin>a').css({
+                    'color':'#059a9e'
+                });
+                $('.saoLogin>a').css({
+                    'color':'#fff'
+                });
+                $('.saoma').addClass('show');
+                $('.j_form3').removeClass('show');
+            }else{
+                $('.accountLogin>a').css({
+                    'color':'#059a9e'
+                });
+                $('.saoLogin>a').css({
+                    'color':'#fff'
+                });
+                $('.saoma').addClass('show');
+                $('.j_form3').removeClass('show');
+            }
+        });
+        $('#top img.weixin').mouseenter(function () {
+            $("#top img.weixinma").animate({'opacity':1},500);
+        }).mouseleave(function () {
+            $("#top img.weixinma").animate({'opacity':0},500);
+        });
+        $('#top img.weibo').click(function () {
+            window.open('https://weibo.com/qudaoban?refer_flag=1001030201_&is_all=1', '_blank');
+        });
+        $('.accountLogin>a').mouseenter(function () {
+            if($('.j_form3').hasClass('show')){
+
+            }else{
+                $('.accountLogin>a').css({
+                    'color':'#fff',
+                    'fontWeight':900
+                });
+            }
+
+        }).mouseleave(function () {
+            if($('.j_form3').hasClass('show')){
+
+            }else{
+                $('.accountLogin>a').css({
+                    'color':'#059a9e',
+                    'fontWeight':500
+                });
+            }
+
+        });
+        $('.saoLogin>a').mouseenter(function () {
+            if($('.saoma').hasClass('show')){
+
+            }else{
+                $('.saoLogin>a').css({
+                    'color':'#fff',
+                    'fontWeight':900
+                });
+            }
+        }).mouseleave(function () {
+            if($('.saoma').hasClass('show')){
+
+            }else{
+                $('.saoLogin>a').css({
+                    'color':'#059a9e',
+                    'fontWeight':500
+                });
+            }
+        });
+       //鼠标移入输入框事件
+        $(function(){
+            var inp=$('.inputHeight');
+            for(var i=0;i<inp.length;i++){
+                +function(i){
+                    $(inp[i]).focus(function(){
+                        if(i==1){
+                            $(inp[i]).prevAll('i').addClass('password_icon').removeClass('password_icon1');
+                            $(inp[i]).parent().prev().children('i').addClass('phone_icon1').removeClass('phone_icon');
+                            $(inp[i]).prevAll('a').addClass('line1').removeClass('line2');
+                            $(inp[i]).parent().prev().children('a').addClass('line2').removeClass('line1');
+                            $(inp[i]).parent().next().children('i').addClass('password_icon1').removeClass('password_icon');
+                            $(inp[i]).parent().css('borderColor','#0AC1C5').siblings().css('borderColor','#E4E4E4');
+                        }else if(i==0){
+                            $(inp[i]).prevAll('i').addClass('phone_icon').removeClass('phone_icon1')
+                            $(inp[i]).parent().nextAll().children('i').addClass('password_icon1').removeClass('password_icon');
+                            $(inp[i]).prevAll('a').addClass('line1').removeClass('line2');
+                            $(inp[i]).parent().nextAll().children('a').addClass('line2').removeClass('line1');
+                            $(inp[i]).parent().next().children('button').css({'background':'#17dce1','color':'#fff'})
+                            $(inp[i]).parent().css('borderColor','#0AC1C5').siblings().css('borderColor','#E4E4E4');
+                        }
+                    })
+                }(i)
+            }
+        })
+    </script>
+</body>
+</html>
